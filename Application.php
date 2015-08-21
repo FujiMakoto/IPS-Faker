@@ -10,11 +10,15 @@
  */
  
 namespace IPS\faker;
+\IPS\IPS::$PSR0Namespaces['Faker'] = \IPS\ROOT_PATH . '/applications/faker/sources/3rd_party/vendor/fzaninotto/faker/src/Faker';
 
 /**
  * Faker Application Class
  */
 class _Application extends \IPS\Application
 {
-
+	public function get__icon()
+	{
+		return 'comments';
+	}
 }
