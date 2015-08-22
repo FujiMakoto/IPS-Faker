@@ -95,4 +95,40 @@ class _Topic extends \IPS\forums\Topic
 
 		return $obj;
 	}
+
+	/**
+	 * Build form to generate
+	 *
+	 * @return	\IPS\faker\Decorators\Form
+	 */
+	public static function buildGenerateForm()
+	{
+		$form = new \IPS\faker\Decorators\Form( 'form', 'faker_form_generate' );
+		$form->langPrefix = 'faker_form';
+
+		$form->add( new \IPS\Helpers\Form\Node( 'forums', null, true, array(
+			'url'					=> \IPS\Http\Url::internal( 'app=forums&module=forums&controller=forums&do=createMenu' ),
+			'class'					=> 'IPS\forums\Forum',
+			'multiple'				=> true,
+
+		) ) );
+		$form->add( new \IPS\Helpers\Form\Select( 'author_type', 'random_fake', true, array(
+			'options' => array( 'random_fake', 'guest' ), 'unlimited' => '-1',
+			'unlimitedLang' => "faker_form_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
+		) ) );
+		$form->add( new \IPS\Helpers\Form\Member( 'author', null, false, array(), null, null, null, 'faker_custom_author' ) );
+		$form->add( new \IPS\Helpers\Form\NumberRange('topic_range', array( 'start' => 3, 'end' => 5 ), true, array(
+			'start' => array( 'min' => 1 ),
+		) ) );
+		$form->add( new \IPS\Helpers\Form\YesNo( 'add_posts', 0, false, array( 'togglesOn' => array( 'faker_post_range' ) ) ) );
+		$form->add( new \IPS\Helpers\Form\NumberRange('post_range', array( 'start' => 3, 'end' => 5 ), false, array(
+			'start' => array( 'min' => 1 ),
+		), null, null, null, 'faker_post_range' ) );
+		$form->add( new \IPS\Helpers\Form\YesNo( 'add_tags', 0 ) );
+		$form->add( new \IPS\Helpers\Form\CheckboxSet( 'after_posting', array(), false, array(
+			'options' => array( 'create_topic_locked', 'create_topic_pinned', 'create_topic_hidden', 'create_topic_featured' )
+		) ) );
+
+		return $form;
+	}
 }
