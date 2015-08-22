@@ -16,6 +16,23 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 class _Member extends \IPS\Member
 {
 	/**
+	 * Return all fake members
+	 *
+	 * @return	\IPS\faker\Content\Member[]
+	 */
+	public static function allFake()
+	{
+		$select = \IPs\Db::i()->select( '*', static::$databaseTable, 'faker_fake=1' );
+
+		$fakeMembers = array();
+		foreach ( $select as $row ) {
+			$fakeMembers[] = static::constructFromData( $row );
+		}
+
+		return $fakeMembers;
+	}
+
+	/**
 	 * Generate a fake member account
 	 *
 	 * @param	array	$values	Generator form values

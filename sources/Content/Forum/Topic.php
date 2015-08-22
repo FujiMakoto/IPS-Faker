@@ -16,6 +16,23 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 class _Topic extends \IPS\forums\Topic
 {
 	/**
+	 * Return all fake topics
+	 *
+	 * @return	\IPS\faker\Content\Forum\Topic[]
+	 */
+	public static function allFake()
+	{
+		$select = \IPs\Db::i()->select( '*', static::$databaseTable, 'faker_fake=1' );
+
+		$fakeMembers = array();
+		foreach ( $select as $row ) {
+			$fakeMembers[] = static::constructFromData( $row );
+		}
+
+		return $fakeMembers;
+	}
+
+	/**
 	 * @param	\IPS\Node\Model	$forum	The forum container
 	 * @param	array			$values	Generator form values
 	 *
@@ -42,7 +59,6 @@ class _Topic extends \IPS\forums\Topic
 
 		/* Assign topic values */
 		$topicValues = array(
-			'faker_fake'		=> 1,
 			'topic_title'		=> $generator->title(),
 			'topic_content'		=> $generator->comment(),
 			'topic_tags'		=> $tagsContainer['tags'],
@@ -75,6 +91,7 @@ class _Topic extends \IPS\forums\Topic
 		/* Create and save the topic */
 		$obj = static::createItem( $member, $ipAddress = $generator->ipAddress(), new \IPS\DateTime, $forum );
 		$obj->processForm( $topicValues );
+		$obj->faker_fake = 1;
 		$obj->save();
 
 		/* Create and save the first post in the topic */
