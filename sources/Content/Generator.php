@@ -9,7 +9,7 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 	exit;
 }
 
-class Generator
+class _Generator
 {
 	/**
 	 * @brief	Faker instance
