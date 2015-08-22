@@ -8,8 +8,10 @@ $lang = array(
 	/* AdminCP Permissions */
 	'r__faker_forum_generator'			=> 'Forum Generator',
 	'r__faker_generate_forum_topics'	=> 'Generate forum topics',
+	'r__faker_member_generator'			=> 'Member Generator',
+	'r__faker_generate_member_accounts'	=> 'Generate member accounts',
 
-	/* Generate content */
+	/* Forum Generator */
 	'menu__faker_forumgen'			=> 'Forum Generator',
 	'menu__faker_forumgen_topics'	=> 'Forum Topics',
 
@@ -22,6 +24,15 @@ $lang = array(
 	'faker_form_post_range'		=> 'Post creation count',
 	'faker_form_add_tags'		=> 'Add tags to posts',
 	'faker_form_after_posting'	=> 'After posting...',
+
+	/* Member Generator */
+	'menu__faker_membergen'			=> 'Member Generator',
+	'menu__faker_membergen_member'	=> 'Member Accounts',
+
+	'faker_form_member_count'	=> 'Member creation count',
+	'faker_form_profile_photo'	=> 'Generate profile photos',
+	'faker_form_member_group'	=> 'Member group',
+
 	'faker_form_generate'		=> 'Generate',
 	'random_fake'				=> 'Random fake member',
 	'specific_member'			=> 'Specific member',
