@@ -29,6 +29,7 @@ class _Generator
 	 * Generate a title
 	 *
 	 * @param	int	$maxChars	Maximum character length of the title
+	 *
 	 * @return	string
 	 */
 	public function title( $maxChars = 50 )
@@ -44,6 +45,7 @@ class _Generator
 	 * @param 	int 	$images			Number of images to include in the comment
 	 * @param	int 	$minSentences	Minimum number of sentences per paragraph
 	 * @param	int 	$maxSentences	Maximum number of sentences per paragraph
+	 *
 	 * @return	string
 	 */
 	public function comment( $minParagraphs = 1, $maxParagraphs = 4, $images = 0, $minSentences = 3, $maxSentences = 9 )
@@ -87,6 +89,50 @@ class _Generator
 		return array( 'tags' => $tags, 'prefix' => $prefix );
 	}
 
+	/**
+	 * Generate a username
+	 *
+	 * @return	string
+	 */
+	public function userName()
+	{
+		return $this->faker->userName;
+	}
+
+	/**
+	 * Generate an email address
+	 *
+	 * @return	string
+	 */
+	public function email()
+	{
+		return $this->faker->safeEmail;
+	}
+
+	/**
+	 * Generate URL to a random photo
+	 *
+	 * @param    null|string $category
+	 * @param    int         $width
+	 * @param    int         $height
+	 *
+	 * @return string
+	 */
+	public function photoUrl( $category = null, $width = 640, $height = 480 )
+	{
+		return $this->faker->imageUrl( $width, $height, $category );
+	}
+
+	/**
+	 * Generate a password
+	 *
+	 * @return	string
+	 */
+	public function password()
+	{
+		return $this->faker->password();
+	}
+
 	public function fakeMember()
 	{
 		// TODO
@@ -100,7 +146,7 @@ class _Generator
 	public function guest()
 	{
 		$member = \IPS\Member::load( 0 );
-		$member->name = $this->faker->name;
+		$member->name = $this->userName();
 
 		return $member;
 	}
@@ -109,6 +155,7 @@ class _Generator
 	 * Generate a fake IP address
 	 *
 	 * @param	int	$ipv6Chance	Percent chance the returned address will be in ipv6 format
+	 *
 	 * @return	string
 	 */
 	public function ipAddress( $ipv6Chance = 25 )
