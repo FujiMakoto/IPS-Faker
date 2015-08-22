@@ -5,9 +5,13 @@ $lang = array(
 	'menutab__faker'		=> "Faker",
 	'menutab__faker_icon'	=> "comments",
 
+	/* AdminCP Permissions */
+	'r__faker_forum_generator'			=> 'Forum Generator',
+	'r__faker_generate_forum_topics'	=> 'Generate forum topics',
+
 	/* Generate content */
-	'menu__faker_generator'			=> 'Generate Content',
-	'menu__faker_generator_topics'	=> 'Forum Topics',
+	'menu__faker_forumgen'			=> 'Forum Generator',
+	'menu__faker_forumgen_topics'	=> 'Forum Topics',
 
 	'faker_form_forums'			=> 'Forums',
 	'faker_form_author_type'	=> 'Author type',
