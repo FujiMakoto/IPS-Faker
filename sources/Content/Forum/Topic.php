@@ -59,34 +59,12 @@ class _Topic extends \IPS\forums\Topic
 
 		/* Assign topic values */
 		$topicValues = array(
-			'topic_title'		=> $generator->title(),
-			'topic_content'		=> $generator->comment(),
-			'topic_tags'		=> $tagsContainer['tags'],
-			'topic_tags_prefix'	=> $tagsContainer['prefix']
+			'topic_title'			=> $generator->title(),
+			'topic_content'			=> $generator->comment(),
+			'topic_tags'			=> $tagsContainer['tags'],
+			'topic_tags_prefix'		=> $tagsContainer['prefix'],
+			'topic_create_state'	=> $values['after_posting']
 		);
-
-		if ( $values['after_posting'] )
-		{
-			if ( in_array( 'lock', $values['after_posting'] ) )
-			{
-				$topicValues['state'] = 'closed';
-			}
-
-			if ( in_array( 'hide', $values['after_posting'] ) )
-			{
-				$topicValues['approved'] = -1;
-			}
-
-			if ( in_array( 'pin', $values['after_posting'] ) )
-			{
-				$topicValues['pinned'] = 1;
-			}
-
-			if ( in_array( 'feature', $values['after_posting'] ) )
-			{
-				$topicValues['featured'] = 1;
-			}
-		}
 
 		/* Create and save the topic */
 		$obj = static::createItem( $member, $ipAddress = $generator->ipAddress(), new \IPS\DateTime, $forum );
@@ -143,7 +121,7 @@ class _Topic extends \IPS\forums\Topic
 		), null, null, null, 'faker_post_range' ) );
 		$form->add( new \IPS\Helpers\Form\YesNo( 'add_tags', 0 ) );
 		$form->add( new \IPS\Helpers\Form\CheckboxSet( 'after_posting', array(), false, array(
-			'options' => array( 'create_topic_locked', 'create_topic_pinned', 'create_topic_hidden', 'create_topic_featured' )
+			'options' => array( 'lock' => 'lock', 'pin' => 'pin', 'hide' => 'hide', 'feature' => 'feature' )
 		) ) );
 
 		return $form;
