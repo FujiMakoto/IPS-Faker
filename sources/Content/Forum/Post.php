@@ -30,7 +30,7 @@ class _Post extends \IPS\forums\Topic\Post
 		/* Generate the author */
 		if ( $values['author'] )
 		{
-			$member = $values['member'];
+			$member = $values['author'];
 		}
 		elseif ( $values['author_type'] == 'random_fake' )
 		{
