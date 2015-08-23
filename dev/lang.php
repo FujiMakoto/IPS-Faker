@@ -3,7 +3,7 @@
 $lang = array(
 	'__app_faker'			=> "Fake Content Generator",
 	'menutab__faker'		=> "Faker",
-	'menutab__faker_icon'	=> "comments",
+	'menutab__faker_icon'	=> "plus-square",
 
 	/* AdminCP Permissions */
 	'r__faker_forum_generator'			=> 'Forum Generator',
