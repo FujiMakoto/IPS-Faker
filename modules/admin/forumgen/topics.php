@@ -22,6 +22,7 @@ class _topics extends \IPS\Dispatcher\Controller
 	public function execute()
 	{
 		\IPS\Dispatcher::i()->checkAcpPermission( 'faker_generate_forum_topics' );
+		\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( 'faker_title_topicsGen' );
 		parent::execute();
 	}
 
@@ -35,7 +36,9 @@ class _topics extends \IPS\Dispatcher\Controller
 		$form = \IPS\faker\Content\Forum\Topic::buildGenerateForm();
 
 		if ( $values = $form->values() ) {
-			return $this->_generateTopics( $values );
+			$this->_generateTopics( $values );
+			return \IPS\Output::i()->redirect( \IPS\Http\Url::internal( 'app=faker&module=forumgen&controller=topics' ),
+				'faker_generate_success' );
 		}
 
 		return \IPS\Output::i()->output = $form;
@@ -52,14 +55,14 @@ class _topics extends \IPS\Dispatcher\Controller
 		foreach ( $values['forums'] as $forum )
 		{
 			$topicCount = mt_rand( $values['topic_range']['start'], $values['topic_range']['end'] );
-			for ( $c = 0 ; $c < $topicCount ; $c++ )
+			for ( $tc = 0 ; $tc < $topicCount ; $tc++ )
 			{
 				$topic = \IPS\faker\Content\Forum\Topic::create( $forum, $values );
 
 				if ( $values['add_posts'] )
 				{
 					$postCount = mt_rand( $values['post_range']['start'], $values['post_range']['end'] );
-					for ( $c = 0 ; $c < $postCount ; $c++ ) {
+					for ( $pc = 0 ; $pc < $postCount ; $pc++ ) {
 						\IPS\faker\Content\Forum\Post::create( $topic, $values );
 					}
 				}

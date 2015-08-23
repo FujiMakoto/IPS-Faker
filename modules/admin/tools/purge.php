@@ -23,6 +23,7 @@ class _purge extends \IPS\Dispatcher\Controller
 	public function execute()
 	{
 		\IPS\Dispatcher::i()->checkAcpPermission( 'faker_tools_purge' );
+		\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( 'faker_title_purge' );
 		parent::execute();
 	}
 
@@ -33,7 +34,7 @@ class _purge extends \IPS\Dispatcher\Controller
 	 */
 	protected function manage()
 	{
-		$form = new \IPS\faker\Decorators\Form( 'form', 'faker_form_purge' );
+		$form = new \IPS\faker\Decorators\Form( 'form', 'faker_purge' );
 		$form->langPrefix = 'faker_form';
 		$form->add( new \IPS\Helpers\Form\CheckboxSet( 'content_types', 0, true, array(
 			'options' => array(
@@ -43,7 +44,9 @@ class _purge extends \IPS\Dispatcher\Controller
 		) ) );
 
 		if ( $values = $form->values() ) {
-			return $this->_purgeContent( $values );
+			$this->_purgeContent( $values );
+			return \IPS\Output::i()->redirect( \IPS\Http\Url::internal( 'app=faker&module=tools&controller=purge' ),
+				'faker_purge_success' );
 		}
 
 		return \IPS\Output::i()->output = $form;

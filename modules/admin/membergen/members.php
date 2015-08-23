@@ -13,7 +13,7 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 /**
  * Member generator
  */
-class _member extends \IPS\Dispatcher\Controller
+class _members extends \IPS\Dispatcher\Controller
 {
 	/**
 	 * Execute
@@ -22,7 +22,8 @@ class _member extends \IPS\Dispatcher\Controller
 	 */
 	public function execute()
 	{
-		\IPS\Dispatcher::i()->checkAcpPermission( 'member_manage' );
+		\IPS\Dispatcher::i()->checkAcpPermission( 'faker_generate_member_accounts' );
+		\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( 'faker_title_membersGen' );
 		parent::execute();
 	}
 
@@ -36,7 +37,9 @@ class _member extends \IPS\Dispatcher\Controller
 		$form = \IPS\faker\Content\Member::buildGenerateForm();
 
 		if ( $values = $form->values() ) {
-			return $this->_generateMembers( $values );
+			$this->_generateMembers( $values );
+			return \IPS\Output::i()->redirect( \IPS\Http\Url::internal( 'app=faker&module=membergen&controller=members' ),
+				'faker_generate_success' );
 		}
 
 		return \IPS\Output::i()->output = $form;
