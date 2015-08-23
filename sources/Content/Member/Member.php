@@ -43,13 +43,16 @@ class _Member extends \IPS\Member
 	{
 		$generator = new \IPS\faker\Content\Generator();
 
+
+
 		/* Create Member */
 		$member = new \IPS\Member;
 		$member->faker_fake			= 1;
 		$member->name				= $generator->userName();
+		$password =		isset ( $values['password'] ) ? $member->name : $generator->password();
 		$member->email				= $generator->email();
 		$member->members_pass_salt  = $member->generateSalt();
-		$member->members_pass_hash  = $member->encryptedPassword( $generator->password() );
+		$member->members_pass_hash  = $member->encryptedPassword( $password );
 		$member->allow_admin_mails  = 0;
 		$member->member_group_id	= $values['member_group'];
 		$member->members_bitoptions['view_sigs'] = TRUE;
@@ -93,6 +96,8 @@ class _Member extends \IPS\Member
 		$form->add( new \IPS\Helpers\Form\YesNo( 'profile_photo', true ) );
 		$form->add( new \IPS\Helpers\Form\Select( 'member_group', \IPS\Settings::i()->member_group, true,
 			array( 'options' => $groupOpts ) ) );
+
+		$form->add( new \IPS\Helpers\Form\YesNo( 'password' ) );
 		// TODO: Generate status posts
 
 		return $form;
