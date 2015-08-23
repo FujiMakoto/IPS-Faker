@@ -37,6 +37,7 @@ $lang = array(
 	'faker_form_member_count'	=> 'Member creation count',
 	'faker_form_profile_photo'	=> 'Generate profile photos',
 	'faker_form_member_group'	=> 'Member group',
+	'faker_form_password'		=> 'Use username as password',
 
 	'faker_form_generate'		=> 'Generate',
 	'random_fake'				=> 'Random fake member',
