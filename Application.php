@@ -21,4 +21,18 @@ class _Application extends \IPS\Application
 	{
 		return 'plus-square';
 	}
+
+	public function acpMenu()
+	{
+		$menu = parent::acpMenu();
+
+		if ( !\IPS\Application::appIsEnabled( 'forums' ) )
+		{
+			unset ( $menu['forumgen'] );
+		}
+		
+		return $menu;
+	}
+
+
 }
