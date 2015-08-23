@@ -39,7 +39,7 @@ class _Member extends \IPS\Member
 	 *
 	 * @return	\IPS\faker\Content\Member
 	 */
-	public static function create( array $values )
+	public static function generate( array $values )
 	{
 		$generator = new \IPS\faker\Content\Generator();
 

@@ -16,12 +16,14 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 class _Post extends \IPS\forums\Topic\Post
 {
 	/**
+	 * Generate a fake forum post
+	 *
 	 * @param	\IPS\forums\Topic	$topic	The Topic we are posting in
 	 * @param	array				$values	Generator form values
 	 *
 	 * @return	\IPS\faker\Content\Forum\Post
 	 */
-	public static function create( \IPS\forums\Topic $topic, array $values )
+	public static function generate( \IPS\forums\Topic $topic, array $values )
 	{
 		$generator = new \IPS\faker\Content\Generator();
 

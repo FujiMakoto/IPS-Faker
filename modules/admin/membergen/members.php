@@ -54,7 +54,7 @@ class _members extends \IPS\Dispatcher\Controller
 	protected function _generateMembers( $values )
 	{
 		for ( $c = 0 ; $c < $values['member_count'] ; $c++ ) {
-			\IPS\faker\Content\Member::create( $values );
+			\IPS\faker\Content\Member::generate( $values );
 		}
 	}
 }

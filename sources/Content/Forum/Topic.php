@@ -33,12 +33,14 @@ class _Topic extends \IPS\forums\Topic
 	}
 
 	/**
+	 * Generate a fake forum topic
+	 *
 	 * @param	\IPS\Node\Model	$forum	The forum container
 	 * @param	array			$values	Generator form values
 	 *
 	 * @return	\IPS\faker\Content\Forum\Topic
 	 */
-	public static function create( \IPS\Node\Model $forum, array $values )
+	public static function generate( \IPS\Node\Model $forum = null, array $values )
 	{
 		$generator = new \IPS\faker\Content\Generator();
 		$tagsContainer = $values['add_tags'] ? $generator->tags() : array( 'tags' => null, 'prefix' => null );

@@ -57,13 +57,13 @@ class _topics extends \IPS\Dispatcher\Controller
 			$topicCount = mt_rand( $values['topic_range']['start'], $values['topic_range']['end'] );
 			for ( $tc = 0 ; $tc < $topicCount ; $tc++ )
 			{
-				$topic = \IPS\faker\Content\Forum\Topic::create( $forum, $values );
+				$topic = \IPS\faker\Content\Forum\Topic::generate( $forum, $values );
 
 				if ( $values['add_posts'] )
 				{
 					$postCount = mt_rand( $values['post_range']['start'], $values['post_range']['end'] );
 					for ( $pc = 0 ; $pc < $postCount ; $pc++ ) {
-						\IPS\faker\Content\Forum\Post::create( $topic, $values );
+						\IPS\faker\Content\Forum\Post::generate( $topic, $values );
 					}
 				}
 			}
