@@ -10,10 +10,13 @@ $lang = array(
 	'r__faker_generate_forum_topics'	=> 'Generate forum topics',
 	'r__faker_member_generator'			=> 'Member Generator',
 	'r__faker_generate_member_accounts'	=> 'Generate member accounts',
+	'r__faker_purge'					=> 'Purge Fake Content',
 
 	/* Forum Generator */
 	'menu__faker_forumgen'			=> 'Forum Generator',
 	'menu__faker_forumgen_topics'	=> 'Forum Topics',
+
+	'faker_title_topicsGen'		=> 'Generate Forum Topics',
 
 	'faker_form_forums'			=> 'Forums',
 	'faker_form_author_type'	=> 'Author type',
@@ -29,6 +32,8 @@ $lang = array(
 	'menu__faker_membergen'			=> 'Member Generator',
 	'menu__faker_membergen_member'	=> 'Member Accounts',
 
+	'faker_title_membersGen'	=> 'Generate Member Accounts',
+
 	'faker_form_member_count'	=> 'Member creation count',
 	'faker_form_profile_photo'	=> 'Generate profile photos',
 	'faker_form_member_group'	=> 'Member group',
@@ -36,4 +41,22 @@ $lang = array(
 	'faker_form_generate'		=> 'Generate',
 	'random_fake'				=> 'Random fake member',
 	'specific_member'			=> 'Specific member',
+
+	/* Tools */
+	'menu__faker_tools'			=> 'Tools',
+	'menu__faker_tools_purge'	=> 'Delete Fake Content',
+
+	'faker_title_purge'			=> 'Purge Faked Content',
+
+	'faker_form_content_types'	=> 'Content types',
+	'faker_form_topics'			=> 'Topics',
+	'faker_form_members'		=> 'Members',
+	'faker_purge'				=> 'Purge content',
+
+	/* Misc. */
+	'faker_generate_success'	=> 'Content successfully generated',
+	'faker_purge_success'		=> 'Fake content successfully deleted',
+
+
+	'faker_form_purge'	=> 'Delete Content'
 );
