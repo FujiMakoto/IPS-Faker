@@ -27,6 +27,14 @@ class _purge extends \IPS\Dispatcher\Controller
 		parent::execute();
 	}
 
+	protected function getContentTypes()
+	{
+		return array(
+				'topics' 	=> 'faker_form_topics',
+				'members'	=> 'faker_form_members'
+		);
+	}
+
 	/**
 	 * Display the content generation form
 	 *
@@ -37,10 +45,7 @@ class _purge extends \IPS\Dispatcher\Controller
 		$form = new \IPS\faker\Decorators\Form( 'form', 'faker_purge' );
 		$form->langPrefix = 'faker_form';
 		$form->add( new \IPS\Helpers\Form\CheckboxSet( 'content_types', 0, true, array(
-			'options' => array(
-				'topics' 	=> 'faker_form_topics',
-				'members'	=> 'faker_form_members'
-			)
+			'options' => $this->getContentTypes()
 		) ) );
 
 		if ( $values = $form->values() ) {
