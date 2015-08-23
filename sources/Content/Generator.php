@@ -133,9 +133,18 @@ class _Generator
 		return $this->faker->password();
 	}
 
+	/**
+	 * Return a random fake member account (or guest account if none exist)
+	 *
+	 * @return	\IPS\faker\Content\Member
+	 */
 	public function fakeMember()
 	{
-		// TODO
+		if ( $fakeMembers = \IPS\faker\Content\Member::allFake() ) {
+			return $fakeMembers[ array_rand( $fakeMembers ) ];
+		}
+
+		return $this->guest();
 	}
 
 	/**
@@ -145,7 +154,7 @@ class _Generator
 	 */
 	public function guest()
 	{
-		$member = \IPS\Member::load( 0 );
+		$member = \IPS\faker\Content\Member::load( 0 );
 		$member->name = $this->userName();
 
 		return $member;

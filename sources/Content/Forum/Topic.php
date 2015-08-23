@@ -110,7 +110,7 @@ class _Topic extends \IPS\forums\Topic
 
 		) ) );
 		$form->add( new \IPS\Helpers\Form\Select( 'author_type', 'random_fake', true, array(
-			'options' => array( 'random_fake', 'guest' ), 'unlimited' => '-1',
+			'options' => array( 'random_fake' => 'random_fake', 'guest' => 'guest' ), 'unlimited' => '-1',
 			'unlimitedLang' => "faker_form_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
 		) ) );
 		$form->add( new \IPS\Helpers\Form\Member( 'author', null, false, array(), null, null, null, 'faker_custom_author' ) );
