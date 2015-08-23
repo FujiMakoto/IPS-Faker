@@ -1,0 +1,20 @@
+{
+    "generator": {
+        "posts": {
+            "posts_manage": "posts_manage"
+        }
+    },
+    "forumgen": {
+        "faker_forum_generator": {
+            "faker_generate_forum_topics": "faker_generate_forum_topics"
+        }
+    },
+    "membergen": {
+        "faker_member_generator": {
+            "faker_generate_member_accounts": "faker_generate_member_accounts"
+        }
+    },
+    "tools": {
+        "faker_purge": []
+    }
+}

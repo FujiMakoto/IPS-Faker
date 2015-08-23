@@ -1,1 +1,8 @@
-{"application_title":"Faker","app_author":"Makoto Fujimoto","app_directory":"faker","app_protected":false,"app_website":{"data":{"scheme":"https","host":"www.Makoto.io"},"queryString":[],"isInternal":false,"isFriendly":false},"app_update_check":{"data":{"scheme":"https","host":"www.makoto.io","path":"\/versions\/applications\/faker\/"},"queryString":[],"isInternal":false,"isFriendly":false}}
+{
+    "application_title": "Fake Content Generator",
+    "app_author": "Makoto Fujimoto",
+    "app_directory": "faker",
+    "app_protected": 0,
+    "app_website": "https:\/\/www.Makoto.io",
+    "app_update_check": "https:\/\/www.makoto.io\/versions\/applications\/faker\/"
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+ <app key="faker" version="00010000">
+  <word key="__app_faker" js="0">Fake Content Generator</word>
+  <word key="menutab__faker" js="0">Faker</word>
+  <word key="menutab__faker_icon" js="0">plus-square</word>
+  <word key="r__faker_forum_generator" js="0">Forum Generator</word>
+  <word key="r__faker_generate_forum_topics" js="0">Generate forum topics</word>
+  <word key="r__faker_member_generator" js="0">Member Generator</word>
+  <word key="r__faker_generate_member_accounts" js="0">Generate member accounts</word>
+  <word key="r__faker_purge" js="0">Purge Fake Content</word>
+  <word key="menu__faker_forumgen" js="0">Forum Generator</word>
+  <word key="menu__faker_forumgen_topics" js="0">Forum Topics</word>
+  <word key="faker_title_topicsGen" js="0">Generate Forum Topics</word>
+  <word key="faker_form_forums" js="0">Forums</word>
+  <word key="faker_form_author_type" js="0">Author type</word>
+  <word key="faker_form_author" js="0">Member name</word>
+  <word key="faker_form_custom_author" js="0">Manually specify a member</word>
+  <word key="faker_form_topic_range" js="0">Topic creation count</word>
+  <word key="faker_form_add_posts" js="0">Create additional posts in topics</word>
+  <word key="faker_form_post_range" js="0">Post creation count</word>
+  <word key="faker_form_add_tags" js="0">Add tags to posts</word>
+  <word key="faker_form_after_posting" js="0">After posting...</word>
+  <word key="menu__faker_membergen" js="0">Member Generator</word>
+  <word key="menu__faker_membergen_member" js="0">Member Accounts</word>
+  <word key="faker_title_membersGen" js="0">Generate Member Accounts</word>
+  <word key="faker_form_member_count" js="0">Member creation count</word>
+  <word key="faker_form_profile_photo" js="0">Generate profile photos</word>
+  <word key="faker_form_member_group" js="0">Member group</word>
+  <word key="faker_form_generate" js="0">Generate</word>
+  <word key="random_fake" js="0">Random fake member</word>
+  <word key="specific_member" js="0">Specific member</word>
+  <word key="menu__faker_tools" js="0">Tools</word>
+  <word key="menu__faker_tools_purge" js="0">Delete Fake Content</word>
+  <word key="faker_title_purge" js="0">Purge Faked Content</word>
+  <word key="faker_form_content_types" js="0">Content types</word>
+  <word key="faker_form_topics" js="0">Topics</word>
+  <word key="faker_form_members" js="0">Members</word>
+  <word key="faker_purge" js="0">Purge content</word>
+  <word key="faker_generate_success" js="0">Content successfully generated</word>
+  <word key="faker_purge_success" js="0">Fake content successfully deleted</word>
+  <word key="faker_form_purge" js="0">Delete Content</word>
+ </app>
+</language>

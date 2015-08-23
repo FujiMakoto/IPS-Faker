@@ -1,1 +1,16 @@
-[]
+{
+    "admin": {
+        "forumgen": {
+            "default_controller": "",
+            "protected": 0
+        },
+        "membergen": {
+            "default_controller": "",
+            "protected": 0
+        },
+        "tools": {
+            "default_controller": "",
+            "protected": false
+        }
+    }
+}
