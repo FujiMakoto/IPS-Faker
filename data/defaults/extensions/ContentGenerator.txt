@@ -31,7 +31,7 @@ class _{class}
 	 *
 	 * @return  \IPS\{app}\Faker\{class}
 	 */
-	public static function generate( array $values )
+	public static function generateItem( array $values )
 	{
 		$generator = new \IPS\faker\Content\Generator();
 
@@ -48,7 +48,7 @@ class _{class}
 	 *
 	 * @return	\IPS\faker\Decorators\Form
 	 */
-	public static function buildGenerateForm()
+	public static function buildGenerateForm( &$form )
 	{
 		$form = new \IPS\faker\Decorators\Form( 'form', 'faker_form_generate_{app}' );
 		$form->langPrefix = 'faker_{app}_form';
