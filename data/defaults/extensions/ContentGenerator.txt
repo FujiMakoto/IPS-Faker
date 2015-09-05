@@ -1,0 +1,60 @@
+<?php
+/**
+ * @brief		Fake Content Generator : {class}
+ * @author		<a href='https://www.Makoto.io'>Makoto Fujimoto</a>
+ * @copyright	(c) 2015 www.Makoto.io
+ * @license		<a href='http://opensource.org/licenses/MIT'>MIT License</a>
+ * @package		Faker
+{subpackage}
+ * @since		{date}
+ * @version		0.2.0
+ */
+
+namespace IPS\{app}\extensions\faker\ContentGenerator;
+
+/* To prevent PHP errors (extending class does not exist) revealing path */
+if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
+{
+	header( ( isset( $_SERVER['SERVER_PROTOCOL'] ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0' ) . ' 403 Forbidden' );
+	exit;
+}
+
+/**
+ * Faker Content Generator Extension: {class}
+ */
+class _{class}
+{
+	/**
+	 * Generate fake {app} content
+	 *
+	 * @param   array   $values Generator form values
+	 *
+	 * @return  \IPS\{app}\Faker\{class}
+	 */
+	public static function generate( array $values )
+	{
+		$generator = new \IPS\faker\Content\Generator();
+
+		/* Create and save the content item */
+		$obj = \IPS\{app}\Faker\{class}::createItem( /* ... */ );
+		$obj->processForm( $values );
+		$obj->save();
+
+		return $obj;
+	}
+
+	/**
+	 * Build a generator form for this content item
+	 *
+	 * @return	\IPS\faker\Decorators\Form
+	 */
+	public static function buildGenerateForm()
+	{
+		$form = new \IPS\faker\Decorators\Form( 'form', 'faker_form_generate_{app}' );
+		$form->langPrefix = 'faker_{app}_form';
+
+		$form->add( new \IPS\Helpers\Form\Text( /* ... */ ) );
+
+		return $form;
+	}
+}

@@ -12,6 +12,9 @@ $lang = array(
 	'r__faker_generate_member_accounts'	=> 'Generate member accounts',
 	'r__faker_purge'					=> 'Purge Fake Content',
 
+	/* Extensions */
+	'ext__ContentGenerator' =>  'Generate fake content to aid in development and for application demonstration.',
+
 	/* Forum Generator */
 	'menu__faker_forumgen'			=> 'Forum Generator',
 	'menu__faker_forumgen_topics'	=> 'Forum Topics',
