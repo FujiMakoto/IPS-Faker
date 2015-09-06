@@ -18,9 +18,9 @@ class _Faker
 	/**
 	 * Generators
 	 */
-	const NODE      = 'NodeGenerator';
-	const ITEM      = 'ItemGenerator';
-	const COMMENT   = 'CommentGenerator';
+	const NODES     = 'NodeGenerator';
+	const ITEMS     = 'ItemGenerator';
+	const COMMENTS  = 'CommentGenerator';
 
 	/**
 	 * Retrieve generator extensions
@@ -34,9 +34,9 @@ class _Faker
 		if ( $generator === NULL )
 		{
 			$rawExtensions = array_merge(
-				\IPS\Application::allExtensions( 'faker', static::NODE ),
-				\IPS\Application::allExtensions( 'faker', static::ITEM ),
-				\IPS\Application::allExtensions( 'faker', static::COMMENT )
+				\IPS\Application::allExtensions( 'faker', static::NODES ),
+				\IPS\Application::allExtensions( 'faker', static::ITEMS ),
+				\IPS\Application::allExtensions( 'faker', static::COMMENTS )
 			);
 		}
 		else
