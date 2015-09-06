@@ -21,14 +21,6 @@ abstract class _Controller extends \IPS\Dispatcher\Controller
 	public static $controller = 'item';
 
 	/**
-	 * Bulk process generations
-	 *
-	 * @param   array|null  $values
-	 * @return  \IPS\Helpers\MultipleRedirect
-	 */
-	abstract protected function generateBulk( $values=NULL );
-
-	/**
 	 * Execute
 	 *
 	 * @return	void
@@ -37,6 +29,14 @@ abstract class _Controller extends \IPS\Dispatcher\Controller
 	{
 		parent::execute();
 	}
+
+	/**
+	 * Bulk process generations
+	 *
+	 * @param   array|null  $values
+	 * @return  \IPS\Helpers\MultipleRedirect
+	 */
+	abstract public function generateBulk( $values=NULL );
 
 	/**
 	 * Get request extension data
@@ -85,7 +85,11 @@ abstract class _Controller extends \IPS\Dispatcher\Controller
 
 		if ( $values = $form->values() )
 		{
-			\IPS\Output::i()->output = (string) $this->generateBulk( $values );
+			if ( method_exists($ext, 'generateBulk') ) {
+				\IPS\Output::i()->output = (string) $ext->generateBulk( $values );
+			} else {
+				\IPS\Output::i()->output = (string) $this->generateBulk( $values );
+			}
 			return;
 		}
 
@@ -99,6 +103,12 @@ abstract class _Controller extends \IPS\Dispatcher\Controller
 	 */
 	public function process()
 	{
-		\IPS\Output::i()->output = (string) $this->generateBulk();
+		list( $ext ) = $this->extData();
+
+		if ( method_exists($ext, 'generateBulk') ) {
+			\IPS\Output::i()->output = (string) $ext->generateBulk();
+		} else {
+			\IPS\Output::i()->output = (string) $this->generateBulk();
+		}
 	}
 }

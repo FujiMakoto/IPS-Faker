@@ -26,7 +26,7 @@ class _items extends \IPS\faker\Faker\Controller
 	 * @param   array|null  $values
 	 * @return  \IPS\Helpers\MultipleRedirect
 	 */
-	protected function generateBulk( $values=NULL )
+	public function generateBulk( $values=NULL )
 	{
 		list( $ext, $extApp, $extension, $controller ) = $this->extData();
 
