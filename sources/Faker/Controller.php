@@ -13,12 +13,20 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 /**
  * Faker base controller
  */
-class _Controller extends \IPS\Dispatcher\Controller
+abstract class _Controller extends \IPS\Dispatcher\Controller
 {
 	/**
 	 * @brief   Controller name
 	 */
 	public static $controller = 'item';
+
+	/**
+	 * Bulk process generations
+	 *
+	 * @param   array|null  $values
+	 * @return  \IPS\Helpers\MultipleRedirect
+	 */
+	abstract protected function generateBulk( $values=NULL );
 
 	/**
 	 * Execute
