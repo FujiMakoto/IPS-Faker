@@ -84,13 +84,14 @@ class _items extends \IPS\faker\Faker\Controller
 				}
 
 				/* Process up to $perGo items from this node */
+				$containerNodeClass = $ext::$containerNodeClass;
 				$count = 0;
 				$_limit = $limit;
 				while ( ($count < $_limit) and (count($itemsGenerated) < $perGo) )
 				{
 					++$count;
 					--$limit;
-					$itemsGenerated[] = $ext::generateSingle( \IPS\forums\Forum::load( $node ), $values );
+					$itemsGenerated[] = $ext::generateSingle( $containerNodeClass::load( $node ), $values );
 				}
 
 				/* If we've cleared out this node, remove it from our map and proceed to the next one */
