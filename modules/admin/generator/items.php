@@ -18,7 +18,7 @@ class _items extends \IPS\faker\Faker\Controller
 	/**
 	 * @brief   Controller name
 	 */
-	public static $controller = 'item';
+	public static $controller = 'items';
 
 	/**
 	 * Bulk process generations
@@ -31,13 +31,13 @@ class _items extends \IPS\faker\Faker\Controller
 		list( $ext, $extApp, $extension, $controller ) = $this->extData();
 
 		/* If this is a form submission, store our values now */
+		$vCookie = $ext::$app . '_faker_' . static::$controller . '_generator_values';
 		if ( $values )
 		{
 			unset( \IPS\Request::i()->cookie['faker_generator_values'] );
 			unset( \IPS\Request::i()->cookie['faker_generator_map'] );
-			\IPS\Request::i()->setCookie( 'faker_generator_values', json_encode($values) );
+			\IPS\Request::i()->setCookie( $vCookie, json_encode($values) );
 		}
-		$vCookie = $ext::$app . '_faker_' . static::$controller . '_generator_values';
 		$values = $values ?: json_decode(\IPS\Request::i()->cookie[ $vCookie ], true);
 		$perGo = isset( $values['per_go'] ) ? (int) $values['per_go'] : 25;
 
@@ -58,7 +58,7 @@ class _items extends \IPS\faker\Faker\Controller
 			}
 			$nodeMap['total'] = array_sum( $nodeMap['nodes'] );
 
-			\IPS\Request::i()->setCookie( 'faker_generator_map', json_encode($nodeMap) );
+			\IPS\Request::i()->setCookie( $mCookie, json_encode($nodeMap) );
 		}
 		$total = $nodeMap['total'];
 
