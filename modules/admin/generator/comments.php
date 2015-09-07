@@ -1,6 +1,5 @@
 <?php
 
-
 namespace IPS\faker\modules\admin\generator;
 
 /* To prevent PHP errors (extending class does not exist) revealing path */
@@ -11,10 +10,15 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 }
 
 /**
- * comments
+ * Comment generator
  */
-class _comments extends \IPS\Dispatcher\Controller
+class _comments extends \IPS\faker\Faker\Controller
 {
+	/**
+	 * @brief   Controller name
+	 */
+	public static $controller = 'comments';
+
 	/**
 	 * Execute
 	 *
@@ -22,19 +26,6 @@ class _comments extends \IPS\Dispatcher\Controller
 	 */
 	public function execute()
 	{
-		
 		parent::execute();
 	}
-
-	/**
-	 * ...
-	 *
-	 * @return	void
-	 */
-	protected function manage()
-	{
-		// This is the default method if no 'do' parameter is specified
-	}
-	
-	// Create new methods with the same name as the 'do' parameter which should execute it
 }
