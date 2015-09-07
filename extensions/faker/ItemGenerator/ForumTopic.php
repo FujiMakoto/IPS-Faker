@@ -35,9 +35,9 @@ class _ForumTopic extends \IPS\faker\Faker\Item
 	public static $acpRestriction = 'faker_generate';
 
 	/**
-	 * @brief   Comment generator extension (if applicable)
+	 * @brief   Comment generator extension
 	 */
-	public static $commentExtension = 'ForumPost';
+	public static $commentExtension = 'TopicPost';
 
 	/**
 	 * @brief	Node Class
@@ -45,9 +45,9 @@ class _ForumTopic extends \IPS\faker\Faker\Item
 	public static $containerNodeClass = 'IPS\forums\Forum';
 
 	/**
-	 * @brief	Content Item Class
+	 * @brief	[Content\Comment]	Item Class
 	 */
-	public static $contentItemClass = 'IPS\forums\Topic';
+	public static $itemClass = 'IPS\forums\Topic';
 
 	/**
 	 * @brief   Generator form title language string
@@ -69,6 +69,7 @@ class _ForumTopic extends \IPS\faker\Faker\Item
 	public function generateSingle( \IPS\Node\Model $forum = null, array $values )
 	{
 		$generator = new \IPS\faker\Content\Generator();
+		$itemClass = static::$itemClass;
 		$tagsContainer = $values['add_tags'] ? $generator->tags() : array( 'tags' => null, 'prefix' => null );
 
 		/* Generate the author */
@@ -101,11 +102,19 @@ class _ForumTopic extends \IPS\faker\Faker\Item
 		$obj->save();
 
 		/* Create and save the first post in the topic */
-		$commentClass = \IPS\forums\Topic::$commentClass;
-		$comment = $commentClass::create( $obj, $topicValues[ 'topic_content' ], TRUE, ( !$member->name ) ? NULL : $member->name, $obj->hidden() ? FALSE : NULL, $member );
-		$comment->ip_address = $ipAddress;
-		$comment->save();
+		$comment = $this->commentExt()->generateSingle( $obj, $values, TRUE );
 
+		/* Create any additional posts if necessary */
+		if ( $values['add_comments'] )
+		{
+			$postCount = mt_rand( $values['comment_range']['start'], $values['comment_range']['end'] );
+			for ( $pc = 0 ; $pc < $postCount ; $pc++ ) {
+				$this->commentExt()->generateSingle( $obj, $values );
+			}
+		}
+
+		/* Claim attachments and map the first comment ID */
+		$commentClass = $itemClass::$commentClass;
 		$commentIdColumn = $commentClass::$databaseColumnId;
 		call_user_func_array( array( 'IPS\File', 'claimAttachments' ), array_merge( array( 'newContentItem-' . \IPS\forums\Topic::$application . '/' . \IPS\forums\Topic::$module  . '-' . ( $forum ? $forum->_id : 0 ) ), $comment->attachmentIds() ) );
 

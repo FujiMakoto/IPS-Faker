@@ -31,7 +31,6 @@ $lang = array(
 	'forums_faker_items_nodes'           => 'Forums',
 	'forums_faker_items_author_type'     => 'Author type',
 	'forums_faker_items_author'          => 'Member name',
-	'forums_faker_custom_author'        => 'Manually specify a member',
 	'forums_faker_items_item_range'      => 'Topic creation count',
 	'forums_faker_items_add_comments'    => 'Create additional posts in topics',
 	'forums_faker_items_comment_range'   => 'Post creation count',
@@ -79,6 +78,7 @@ $lang = array(
 	'faker_purge'               => 'Purge content',
 
 	/* Misc. */
+	'faker_custom_author'       => 'Manually specify a member',
 	'faker_generate_success'    => 'Content successfully generated',
 	'faker_purge_success'       => 'Fake content successfully deleted',
 

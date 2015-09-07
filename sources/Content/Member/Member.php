@@ -43,8 +43,6 @@ class _Member extends \IPS\Member
 	{
 		$generator = new \IPS\faker\Content\Generator();
 
-
-
 		/* Create Member */
 		$member = new \IPS\Member;
 		$member->faker_fake			= 1;

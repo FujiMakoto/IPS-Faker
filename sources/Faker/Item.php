@@ -83,7 +83,7 @@ abstract class _Item implements Extensible
 		}
 
 		/* Return the extension if it exists */
-		if ( in_array( $app . '_' . $commentExtension, $extensions ) ) {
+		if ( isset($extensions[ $app . '_' . $commentExtension ]) ) {
 			return $extensions[ $app . '_' . $commentExtension ];
 		}
 
@@ -93,7 +93,7 @@ abstract class _Item implements Extensible
 	/**
 	 * Generate fake content
 	 *
-	 * @param	\IPS\Node\Model	$node	The item container
+	 * @param   \IPS\Node\Model	$node	The item container
 	 * @param   array           $values Generator form values
 	 * @return  \IPS\Content\Item
 	 */
@@ -176,7 +176,7 @@ abstract class _Item implements Extensible
 				{
 					++$count;
 					--$limit;
-					$itemsGenerated[] = $ext::generateSingle( $_node, $values );
+					$itemsGenerated[] = $ext->generateSingle( $_node, $values );
 				}
 
 				/* If we've cleared out this node, remove it from our map and proceed to the next one */

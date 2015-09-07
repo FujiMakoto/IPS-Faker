@@ -84,7 +84,7 @@ abstract class _Comment implements Extensible
 
 		/* Return the extension if it exists */
 		if ( in_array( $app . '_' . $commentExtension, $extensions ) ) {
-			return $extensions[ $app . '_' . $commentExtension ];
+			return static::$_commentExtension = $extensions[ $app . '_' . $commentExtension ];
 		}
 
 		return NULL;
