@@ -65,14 +65,15 @@ class _TopicPost extends \IPS\faker\Faker\Comment
 	public static $message = 'forums_faker_comments_generator_message';
 
 	/**
-	 * Generate a fake content comment
+	 * Generate a fake item comment
 	 *
-	 * @param	\IPS\Content\Item   $topic  The content item
+	 * @param   \IPS\Content\Item   $topic  The content item
 	 * @param   array               $values Generator form values
+	 * @param   bool                $first  Indicates this is the first comment for an item
 	 *
 	 * @return  \IPS\Content\Comment
 	 */
-	public function generateSingle( \IPS\Content\Item $topic, array $values )
+	public function generateSingle( \IPS\Content\Item $topic, array $values, $first=FALSE )
 	{
 		$generator = new \IPS\faker\Content\Generator();
 		$commentClass = static::$commentClass;
@@ -92,7 +93,7 @@ class _TopicPost extends \IPS\faker\Faker\Comment
 		}
 
 		/* Create and save the post */
-		$obj = $commentClass::create( $topic, $generator->comment(), TRUE, ( !$member->name ) ? NULL : $member->name, $topic->hidden() ? FALSE : NULL, $member );
+		$obj = $commentClass::create( $topic, $generator->comment(), $first, ( !$member->name ) ? NULL : $member->name, $topic->hidden() ? FALSE : NULL, $member );
 		$obj->ip_address = $generator->ipAddress();
 		$obj->save();
 

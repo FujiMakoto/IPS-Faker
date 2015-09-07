@@ -95,10 +95,11 @@ abstract class _Comment implements Extensible
 	 *
 	 * @param	\IPS\Content\Item   $item   The content item
 	 * @param   array               $values Generator form values
+	 * @param   bool                $first  Indicates this is the first comment for an item
 	 *
 	 * @return  \IPS\Content\Comment
 	 */
-	abstract public function generateSingle( \IPS\Content\Item $item, array $values );
+	abstract public function generateSingle( \IPS\Content\Item $item, array $values, $first=FALSE );
 
 	/**
 	 * Bulk process generations
