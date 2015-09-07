@@ -91,6 +91,15 @@ abstract class _Item implements Extensible
 	}
 
 	/**
+	 * Generate fake content
+	 *
+	 * @param	\IPS\Node\Model	$node	The item container
+	 * @param   array           $values Generator form values
+	 * @return  \IPS\Content\Item
+	 */
+	abstract public function generateSingle( \IPS\Node\Model $node = null, array $values );
+
+	/**
 	 * Bulk process generations
 	 *
 	 * @param   array       $extData            Extension data ( $ext, $extApp, $extension, $controller )

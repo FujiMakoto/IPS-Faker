@@ -12,19 +12,10 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 interface Extensible
 {
 	/**
-	 * Generate fake content
-	 *
-	 * @param	\IPS\Node\Model	$node	The item container
-	 * @param   array           $values Generator form values
-	 * @return  \IPS\Content\Item
-	 */
-	public function generateSingle( \IPS\Node\Model $node = null, array $values );
-
-	/**
 	 * Bulk process generations
 	 *
-	 * @param   array       $extData            Extension data ( $ext, $extApp, $extension, $controller )
-	 * @param   array|null  $values             Form submission values
+	 * @param   array       $extData    Extension data ( $ext, $extApp, $extension, $controller )
+	 * @param   array|null  $values     Form submission values
 	 * @return  \IPS\Helpers\MultipleRedirect
 	 */
 	public function generateBulk( array $extData, $values=NULL );
