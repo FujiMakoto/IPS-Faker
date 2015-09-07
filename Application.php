@@ -51,7 +51,7 @@ class _Application extends \IPS\Application
 			}
 
 			/* Do we need to create a new category for this app? */
-			if ( !in_array($app, $menu) ) {
+			if ( !isset( $menu[ $app ] ) ) {
 				$menu[ $app ] = array();
 			}
 
