@@ -47,12 +47,12 @@ abstract class _Item implements Extensible
 	/**
 	 * @brief   Generator form title language string
 	 */
-	public static $formTitle;
+	public static $title;
 
 	/**
-	 * @brief   Generator MultipleRedirect title language string
+	 * @brief   Generator progress message language string
 	 */
-	public static $generatorTitle;
+	public static $message;
 
 	/**
 	 * Load the Comments extension for this Item
@@ -148,11 +148,11 @@ abstract class _Item implements Extensible
 					break;
 				}
 
-				/* Load our node container and set our dynamic title here */
+				/* Load our node container and set our dynamic message here */
 				$containerNodeClass = $ext::$containerNodeClass;
-				$node = $containerNodeClass::load( $node );
-				\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( $ext::$generatorTitle, array(
-					'sprintf' => $node->_title
+				$_node = $containerNodeClass::load( $node );
+				$message = \IPS\Member::loggedIn()->language()->addToStack( $ext::$message, true, array(
+					'sprintf' => $_node->_title
 				) );
 
 				/* Process up to $perGo items from this node */
@@ -162,7 +162,7 @@ abstract class _Item implements Extensible
 				{
 					++$count;
 					--$limit;
-					$itemsGenerated[] = $ext::generateSingle( $node, $values );
+					$itemsGenerated[] = $ext::generateSingle( $_node, $values );
 				}
 
 				/* If we've cleared out this node, remove it from our map and proceed to the next one */
@@ -176,11 +176,13 @@ abstract class _Item implements Extensible
 			/* Update our session cookies and proceed to the next chunk */
 			\IPS\Request::i()->setCookie( $vCookie, json_encode($values) );
 			\IPS\Request::i()->setCookie( $mCookie, json_encode($nodeMap) );
-			return array( $doneSoFar, \IPS\Member::loggedIn()->language()->addToStack('generating'), ( 100 * $doneSoFar ) / $total );
+			return array( $doneSoFar, $message, ( 100 * $doneSoFar ) / $total );
 
-		}, function() use( $values )
+		}, function() use( $values, $controller, $extApp, $extension )
 		{
-			\IPS\Output::i()->redirect( \IPS\Http\Url::internal( 'app=gallery&module=gallery&controller=settings' ), 'completed' );
+			\IPS\Output::i()->redirect( \IPS\Http\Url::internal(
+				"app=faker&module=generator&controller={$controller}&extApp={$extApp}&extension={$extension}"
+			), 'completed' );
 		} );
 	}
 }

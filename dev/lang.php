@@ -4,6 +4,7 @@ $lang = array(
 	'__app_faker'           => "Fake Content Generator",
 	'menutab__faker'        => "Faker",
 	'menutab__faker_icon'   => "plus-square",
+	'faker_generator_title' => "Generating %s",
 
 	/* AdminCP Permissions */
 	'r__faker_forum_generator'          => 'Forum Generator',
@@ -19,8 +20,8 @@ $lang = array(
 	'menu__faker_forums'            => 'Forum Generator',
 	'menu__faker_forums_ForumTopic' => 'Forum Topics',
 
-	'forums_faker_item_form_title'      => 'Generate Forum Topics',
-	'forums_faker_item_generator_title' => 'Generating forum posts in %s',
+	'forums_faker_item_title'               => 'Generate Forum Topics',
+	'forums_faker_item_generator_message'   => 'Generating forum topics in %s',
 
 	'forums_faker_item_nodes'           => 'Forums',
 	'forums_faker_item_author_type'     => 'Author type',

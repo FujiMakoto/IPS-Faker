@@ -52,12 +52,12 @@ class _ForumTopic extends \IPS\faker\Faker\Item
 	/**
 	 * @brief   Generator form title language string
 	 */
-	public static $formTitle = 'forums_faker_item_title';
+	public static $title = 'forums_faker_item_title';
 
 	/**
-	 * @brief   Generator MultipleRedirect title language string
+	 * @brief   Generator progress message language string
 	 */
-	public static $generatorTitle = 'forums_faker_item_generator_title';
+	public static $message = 'forums_faker_item_generator_message';
 
 	/**
 	 * Generate a fake forum topic

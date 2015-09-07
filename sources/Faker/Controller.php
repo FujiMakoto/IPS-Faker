@@ -78,11 +78,14 @@ class _Controller extends \IPS\Dispatcher\Controller
 
 		if ( $values = $form->values() )
 		{
+			\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( 'faker_generator_title', true, array(
+				'sprintf' => \IPS\Member::loggedIn()->language()->addToStack( "menu__faker_{$extApp}_{$extension}" )
+			) );
 			\IPS\Output::i()->output = (string) $ext->generateBulk( $extData, $values );
 			return;
 		}
 
-		\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( $ext::$formTitle );
+		\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( $ext::$title );
 		\IPS\Output::i()->output = $form;
 	}
 
@@ -95,9 +98,6 @@ class _Controller extends \IPS\Dispatcher\Controller
 	{
 		$extData = $this->extData();
 		$ext = $extData[0];
-
-		/* This should usually be overridden in generateBulk(), but just in case it's not, we set the title here */
-		\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( $ext::$generatorTitle );
 
 		\IPS\Output::i()->output = (string) $ext->generateBulk( $extData );
 	}

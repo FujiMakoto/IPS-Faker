@@ -52,12 +52,12 @@ class _{class} extends \IPS\faker\Faker\Item
 	/**
 	 * @brief   Generator form title language string
 	 */
-	public static $formTitle = '{app}_faker_item_form_title';
+	public static $title = '{app}_faker_item_form_title';
 
 	/**
-	 * @brief   Generator MultipleRedirect title language string
+	 * @brief   Generator progress message language string
 	 */
-	public static $generatorTitle = '{app}_faker_item_generator_title';
+	public static $message = '{app}_faker_item_generator_message';
 
 	/**
 	 * Generate a fake content item
