@@ -22,7 +22,7 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 /**
  * Faker Item Generator Extension: {class}
  */
-class _{class}
+class _{class} extends \IPS\faker\Faker\Item
 {
 	/**
 	 * @brief   Application name
@@ -35,7 +35,7 @@ class _{class}
 	public static $acpRestriction = 'faker_generate';
 
 	/**
-	 * @brief   Comment generator extension (if applicable)
+	 * @brief   Comment generator extension
 	 */
 	public static $commentExtension = 'CommentGenerator';
 
@@ -45,9 +45,19 @@ class _{class}
 	public static $containerNodeClass = 'IPS\{app}\Node';
 	
 	/**
-	 * @brief	Content Item Class
+	 * @brief	Item Class
 	 */
 	public static $contentItemClass = 'IPS\{app}\Item';
+
+	/**
+	 * @brief   Generator form title language string
+	 */
+	public static $formTitle = '{app}_faker_item_form_title';
+
+	/**
+	 * @brief   Generator MultipleRedirect title language string
+	 */
+	public static $generatorTitle = '{app}_faker_item_generator_title';
 
 	/**
 	 * Generate a fake content item
@@ -125,7 +135,7 @@ class _{class}
 		) ) );
 		$form->add( new \IPS\Helpers\Form\Select( 'author_type', 'random_fake', true, array(
 			'options' => array( 'random_fake' => 'random_fake', 'guest' => 'guest' ), 'unlimited' => '-1',
-			'unlimitedLang' => "faker_form_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
+			'unlimitedLang' => "forums_faker_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
 		) ) );
 		$form->add( new \IPS\Helpers\Form\Member( 'author', null, false, array(), null, null, null, 'faker_custom_author' ) );
 		$form->add( new \IPS\Helpers\Form\NumberRange('item_range', array( 'start' => 3, 'end' => 5 ), true, array(

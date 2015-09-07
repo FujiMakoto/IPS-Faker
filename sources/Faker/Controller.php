@@ -81,6 +81,7 @@ class _Controller extends \IPS\Dispatcher\Controller
 			return;
 		}
 
+		\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( $ext::$formTitle );
 		\IPS\Output::i()->output = $form;
 	}
 
@@ -92,6 +93,10 @@ class _Controller extends \IPS\Dispatcher\Controller
 	public function process()
 	{
 		list( $ext ) = $this->extData();
+
+		/* This should usually be overridden in generateBulk(), but just in case it's not, we set the title here */
+		\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( $ext::$generatorTitle );
+
 		$ext->generateBulk();
 	}
 }

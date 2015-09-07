@@ -21,9 +21,8 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 
 /**
  * Faker Content Generator Extension: ForumTopic
- * @package IPS\faker\extensions\faker\ItemGenerator
  */
-class _ForumTopic
+class _ForumTopic extends \IPS\faker\Faker\Item
 {
 	/**
 	 * @brief   Application name
@@ -46,6 +45,21 @@ class _ForumTopic
 	public static $containerNodeClass = 'IPS\forums\Forum';
 
 	/**
+	 * @brief	Content Item Class
+	 */
+	public static $contentItemClass = 'IPS\forums\Topic';
+
+	/**
+	 * @brief   Generator form title language string
+	 */
+	public static $formTitle = 'forums_faker_item_title';
+
+	/**
+	 * @brief   Generator MultipleRedirect title language string
+	 */
+	public static $generatorTitle = 'forums_faker_item_generator_title';
+
+	/**
 	 * Generate a fake forum topic
 	 *
 	 * @param	\IPS\Node\Model	$forum	The forum container
@@ -53,7 +67,7 @@ class _ForumTopic
 	 *
 	 * @return  \IPS\faker\Content\Forum\Topic
 	 */
-	public static function generateSingle( \IPS\Node\Model $forum = null, array $values )
+	public function generateSingle( \IPS\Node\Model $forum = null, array $values )
 	{
 		$generator = new \IPS\faker\Content\Generator();
 		$tagsContainer = $values['add_tags'] ? $generator->tags() : array( 'tags' => null, 'prefix' => null );
@@ -111,16 +125,16 @@ class _ForumTopic
 	 *
 	 * @return	\IPS\faker\Decorators\Form
 	 */
-	public static function buildGenerateForm( &$form )
+	public function buildGenerateForm( &$form )
 	{
 		$form->add( new \IPS\Helpers\Form\Node( 'nodes', null, true, array(
 			'url'					=> \IPS\Http\Url::internal( 'app=forums&module=forums&controller=forums&do=createMenu' ),
-			'class'					=> 'IPS\forums\Forum',
+			'class'					=> static::$containerNodeClass,
 			'multiple'				=> true,
 		) ) );
 		$form->add( new \IPS\Helpers\Form\Select( 'author_type', 'random_fake', true, array(
 			'options' => array( 'random_fake' => 'random_fake', 'guest' => 'guest' ), 'unlimited' => '-1',
-			'unlimitedLang' => "faker_form_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
+			'unlimitedLang' => "forums_faker_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
 		) ) );
 		$form->add( new \IPS\Helpers\Form\Member( 'author', null, false, array(), null, null, null, 'faker_custom_author' ) );
 		$form->add( new \IPS\Helpers\Form\NumberRange('item_range', array( 'start' => 3, 'end' => 5 ), true, array(

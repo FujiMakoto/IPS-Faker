@@ -45,6 +45,16 @@ abstract class _Item implements Extensible
 	public static $contentItemClass;
 
 	/**
+	 * @brief   Generator form title language string
+	 */
+	public static $formTitle;
+
+	/**
+	 * @brief   Generator MultipleRedirect title language string
+	 */
+	public static $generatorTitle;
+
+	/**
 	 * Load the Comments extension for this Item
 	 *
 	 * @return  mixed   The extension if it exists, otherwise NULL
@@ -138,8 +148,14 @@ abstract class _Item implements Extensible
 					break;
 				}
 
-				/* Process up to $perGo items from this node */
+				/* Load our node container and set our dynamic title here */
 				$containerNodeClass = $ext::$containerNodeClass;
+				$node = $containerNodeClass::load( $node );
+				\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( $ext::$generatorTitle, array(
+					'sprintf' => $node->_title
+				) );
+
+				/* Process up to $perGo items from this node */
 				$count = 0;
 				$_limit = $limit;
 				while ( ($count < $_limit) and (count($itemsGenerated) < $perGo) )
