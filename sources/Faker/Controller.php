@@ -13,7 +13,7 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 /**
  * Faker base controller
  */
-abstract class _Controller extends \IPS\Dispatcher\Controller
+class _Controller extends \IPS\Dispatcher\Controller
 {
 	/**
 	 * @brief   Controller name
@@ -29,14 +29,6 @@ abstract class _Controller extends \IPS\Dispatcher\Controller
 	{
 		parent::execute();
 	}
-
-	/**
-	 * Bulk process generations
-	 *
-	 * @param   array|null  $values
-	 * @return  \IPS\Helpers\MultipleRedirect
-	 */
-	abstract public function generateBulk( $values=NULL );
 
 	/**
 	 * Get request extension data
@@ -85,11 +77,7 @@ abstract class _Controller extends \IPS\Dispatcher\Controller
 
 		if ( $values = $form->values() )
 		{
-			if ( method_exists($ext, 'generateBulk') ) {
-				\IPS\Output::i()->output = (string) $ext->generateBulk( $values );
-			} else {
-				\IPS\Output::i()->output = (string) $this->generateBulk( $values );
-			}
+			$ext->generateBulk( $values );
 			return;
 		}
 
@@ -104,11 +92,6 @@ abstract class _Controller extends \IPS\Dispatcher\Controller
 	public function process()
 	{
 		list( $ext ) = $this->extData();
-
-		if ( method_exists($ext, 'generateBulk') ) {
-			\IPS\Output::i()->output = (string) $ext->generateBulk();
-		} else {
-			\IPS\Output::i()->output = (string) $this->generateBulk();
-		}
+		$ext->generateBulk();
 	}
 }
