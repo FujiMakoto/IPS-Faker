@@ -73,7 +73,7 @@ class _Controller extends \IPS\Dispatcher\Controller
 		$form = new \IPS\faker\Decorators\Form( 'form', 'faker_form_generate', \IPS\Http\Url::internal(
 			"app=faker&module=generator&controller={$controller}&extApp={$extApp}&extension={$extension}"
 		));
-		$form->langPrefix = "{$extApp}_faker_item";
+		$form->langPrefix = "{$extApp}_faker_{$controller}";
 		$ext->buildGenerateForm( $form );
 
 		if ( $values = $form->values() )
