@@ -68,9 +68,8 @@ class _ForumTopic extends \IPS\faker\Faker\Item
 	 */
 	public function generateSingle( \IPS\Node\Model $forum = null, array $values )
 	{
-		$generator = new \IPS\faker\Content\Generator();
 		$itemClass = static::$itemClass;
-		$tagsContainer = $values['add_tags'] ? $generator->tags() : array( 'tags' => null, 'prefix' => null );
+		$tagsContainer = $values['add_tags'] ? $this->generator->tags() : array( 'tags' => null, 'prefix' => null );
 
 		/* Generate the author */
 		if ( $values['author'] )
@@ -79,24 +78,24 @@ class _ForumTopic extends \IPS\faker\Faker\Item
 		}
 		elseif ( $values['author_type'] == 'random_fake' )
 		{
-			$member = $generator->fakeMember();
+			$member = $this->generator->fakeMember();
 		}
 		else
 		{
-			$member = $generator->guest();
+			$member = $this->generator->guest();
 		}
 
 		/* Assign topic values */
 		$topicValues = array(
-			'topic_title'			=> $generator->title(),
-			'topic_content'			=> $generator->comment(),
+			'topic_title'			=> $this->generator->title(),
+			'topic_content'			=> $this->generator->comment(),
 			'topic_tags'			=> $tagsContainer['tags'],
 			'topic_tags_prefix'		=> $tagsContainer['prefix'],
 			'topic_create_state'	=> $values['after_posting']
 		);
 
 		/* Create and save the topic */
-		$obj = \IPS\forums\Topic::createItem( $member, $ipAddress = $generator->ipAddress(), new \IPS\DateTime, $forum );
+		$obj = \IPS\forums\Topic::createItem( $member, $ipAddress = $this->generator->ipAddress(), new \IPS\DateTime, $forum );
 		$obj->processForm( $topicValues );
 		$obj->faker_fake = 1;
 		$obj->save();

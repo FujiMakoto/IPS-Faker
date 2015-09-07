@@ -60,6 +60,20 @@ abstract class _Comment implements Extensible
 	public static $message;
 
 	/**
+	 * @brief   Faker decorator container
+	 * @var     \IPS\faker\Content\Generator
+	 */
+	public $generator = NULL;
+
+	/**
+	 * Constructor
+	 */
+	public function __construct()
+	{
+		$this->generator = new \IPS\faker\Content\Generator();
+	}
+
+	/**
 	 * Load the Comments extension for this Item
 	 *
 	 * @return  mixed   The extension if it exists, otherwise NULL

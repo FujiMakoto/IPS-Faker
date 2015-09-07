@@ -75,7 +75,6 @@ class _TopicPost extends \IPS\faker\Faker\Comment
 	 */
 	public function generateSingle( \IPS\Content\Item $topic, array $values, $first=FALSE )
 	{
-		$generator = new \IPS\faker\Content\Generator();
 		$commentClass = static::$commentClass;
 
 		/* Generate the author */
@@ -85,16 +84,16 @@ class _TopicPost extends \IPS\faker\Faker\Comment
 		}
 		elseif ( $values['author_type'] == 'random_fake' )
 		{
-			$member = $generator->fakeMember();
+			$member = $this->generator->fakeMember();
 		}
 		else
 		{
-			$member = $generator->guest();
+			$member = $this->generator->guest();
 		}
 
 		/* Create and save the post */
-		$obj = $commentClass::create( $topic, $generator->comment(), $first, ( !$member->name ) ? NULL : $member->name, $topic->hidden() ? FALSE : NULL, $member );
-		$obj->ip_address = $generator->ipAddress();
+		$obj = $commentClass::create( $topic, $this->generator->comment(), $first, ( !$member->name ) ? NULL : $member->name, $topic->hidden() ? FALSE : NULL, $member );
+		$obj->ip_address = $this->generator->ipAddress();
 		$obj->save();
 
 		$itemClass = static::$itemClass;
