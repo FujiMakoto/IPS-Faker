@@ -1,0 +1,143 @@
+<?php
+/**
+ * @brief		Faker Item Generator : {class}
+ * @author		<a href='https://www.Makoto.io'>Makoto Fujimoto</a>
+ * @copyright	(c) 2015 www.Makoto.io
+ * @license		<a href='http://opensource.org/licenses/MIT'>MIT License</a>
+ * @package		Faker
+{subpackage}
+ * @since		{date}
+ * @version		0.2.0
+ */
+
+namespace IPS\{app}\extensions\faker\ItemGenerator;
+
+/* To prevent PHP errors (extending class does not exist) revealing path */
+if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
+{
+	header( ( isset( $_SERVER['SERVER_PROTOCOL'] ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0' ) . ' 403 Forbidden' );
+	exit;
+}
+
+/**
+ * Faker Item Generator Extension: {class}
+ */
+class _{class}
+{
+	/**
+	 * @brief   Application name
+	 */
+	public static $app = '{app}';
+
+	/**
+	 * @brief   AdminCP tab restriction
+	 */
+	public static $acpRestriction = 'faker_generate';
+
+	/**
+	 * @brief   Comment generator extension (if applicable)
+	 */
+	public static $commentExtension = 'CommentGenerator';
+
+	/**
+	 * @brief	Node Class
+	 */
+	public static $containerNodeClass = 'IPS\{app}\Node';
+	
+	/**
+	 * @brief	Content Item Class
+	 */
+	public static $contentItemClass = 'IPS\{app}\Item';
+
+	/**
+	 * Generate a fake content item
+	 *
+	 * @param	\IPS\Node\Model	$node	The item container
+	 * @param   array           $values Generator form values
+	 *
+	 * @return  \IPS\Content\Item
+	 */
+	public static function generateSingle( \IPS\Node\Model $node = null, array $values )
+	{
+		$generator = new \IPS\faker\Content\Generator();
+		$contentItemClass = static::$contentItemClass;
+		$tagsContainer = $values['add_tags'] ? $generator->tags() : array( 'tags' => null, 'prefix' => null );
+
+		/* Generate the author */
+		if ( $values['author'] )
+		{
+			$member = $values['author'];
+		}
+		elseif ( $values['author_type'] == 'random_fake' )
+		{
+			$member = $generator->fakeMember();
+		}
+		else
+		{
+			$member = $generator->guest();
+		}
+
+		/* Assign item values */
+		$itemValues = array(
+			'title'         => $generator->title(),
+			'content'       => $generator->comment(),
+			'tags'          => $tagsContainer['tags'],
+			'tags_prefix'   => $tagsContainer['prefix'],
+			'create_state'  => $values['after_posting']
+		);
+
+		/* Create and save the item */
+		$obj = $contentItemClass::createItem( $member, $ipAddress = $generator->ipAddress(), new \IPS\DateTime, $node );
+		$obj->processForm( $itemValues );
+		$obj->faker_fake = 1;
+		$obj->save();
+
+		/* Create and save the first comment in the item */
+		$commentClass = $contentItemClass::$commentClass;
+		$comment = $commentClass::create( $obj, $itemValues[ 'content' ], TRUE, ( !$member->name ) ? NULL : $member->name, $obj->hidden() ? FALSE : NULL, $member );
+		$comment->ip_address = $ipAddress;
+		$comment->save();
+
+		$commentIdColumn = $commentClass::$databaseColumnId;
+		call_user_func_array( array( 'IPS\File', 'claimAttachments' ), array_merge( array( 'newContentItem-' . $contentItemClass::$application . '/' . $contentItemClass::$module  . '-' . ( $node ? $node->_id : 0 ) ), $comment->attachmentIds() ) );
+
+		if ( isset( $contentItemClass::$databaseColumnMap['first_comment_id'] ) )
+		{
+			$firstCommentIdColumn = $contentItemClass::$databaseColumnMap['first_comment_id'];
+			$obj->$firstCommentIdColumn = $comment->$commentIdColumn;
+			$obj->save();
+		}
+
+		return $obj;
+	}
+
+	/**
+	 * Build a generator form for this content item
+	 *
+	 * @return	\IPS\faker\Decorators\Form
+	 */
+	public static function buildGenerateForm( &$form )
+	{
+		$form->add( new \IPS\Helpers\Form\Node( 'nodes', null, true, array(
+			'url'					=> \IPS\Http\Url::internal( 'app={app}&module={app}&controller={app}&do=createMenu' ),
+			'class'					=> static::$containerNodeClass,
+			'multiple'				=> true,
+		) ) );
+		$form->add( new \IPS\Helpers\Form\Select( 'author_type', 'random_fake', true, array(
+			'options' => array( 'random_fake' => 'random_fake', 'guest' => 'guest' ), 'unlimited' => '-1',
+			'unlimitedLang' => "faker_form_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
+		) ) );
+		$form->add( new \IPS\Helpers\Form\Member( 'author', null, false, array(), null, null, null, 'faker_custom_author' ) );
+		$form->add( new \IPS\Helpers\Form\NumberRange('item_range', array( 'start' => 3, 'end' => 5 ), true, array(
+			'start' => array( 'min' => 1 ),
+		) ) );
+		$form->add( new \IPS\Helpers\Form\YesNo( 'add_comments', 0, false, array( 'togglesOn' => array( 'faker_comment_range' ) ) ) );
+		$form->add( new \IPS\Helpers\Form\NumberRange('comment_range', array( 'start' => 3, 'end' => 5 ), false, array(
+			'start' => array( 'min' => 1 ),
+		), null, null, null, 'faker_comment_range' ) );
+		$form->add( new \IPS\Helpers\Form\YesNo( 'add_tags', 0 ) );
+		$form->add( new \IPS\Helpers\Form\CheckboxSet( 'after_posting', array(), false, array(
+			'options' => array( 'lock' => 'lock', 'pin' => 'pin', 'hide' => 'hide', 'feature' => 'feature' )
+		) ) );
+	}
+}
