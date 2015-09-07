@@ -14,26 +14,45 @@ $lang = array(
 	'r__faker_purge'                    => 'Purge Fake Content',
 
 	/* Extensions */
-	'ext__ContentGenerator' => 'Generate fake content to aid in development and for application demonstration.',
+	'ext__ItemGenerator'    => 'Generate fake Content Item submissions (e.g. forum topics).',
+	'ext__CommentGenerator' => 'Generate fake Content Comment submissions (e.g. forum topic posts).',
 
-	/* Forum Generator */
-	'menu__faker_forums'            => 'Forum Generator',
+	/********************************
+	 * Forum Generators             *
+	 ********************************/
+	'menu__faker_forums'    => 'Forum Generator',
+
+	# Topics
 	'menu__faker_forums_ForumTopic' => 'Forum Topics',
 
-	'forums_faker_item_title'               => 'Generate Forum Topics',
-	'forums_faker_item_generator_message'   => 'Generating forum topics in %s',
+	'forums_faker_items_title'               => 'Generate Forum Topics',
+	'forums_faker_items_generator_message'   => 'Generating forum topics in %s',
 
-	'forums_faker_item_nodes'           => 'Forums',
-	'forums_faker_item_author_type'     => 'Author type',
-	'forums_faker_item_author'          => 'Member name',
+	'forums_faker_items_nodes'           => 'Forums',
+	'forums_faker_items_author_type'     => 'Author type',
+	'forums_faker_items_author'          => 'Member name',
 	'forums_faker_custom_author'        => 'Manually specify a member',
-	'forums_faker_item_item_range'      => 'Topic creation count',
-	'forums_faker_item_add_comments'    => 'Create additional posts in topics',
-	'forums_faker_item_comment_range'   => 'Post creation count',
-	'forums_faker_item_add_tags'        => 'Add tags to posts',
-	'forums_faker_item_after_posting'   => 'After posting...',
+	'forums_faker_items_item_range'      => 'Topic creation count',
+	'forums_faker_items_add_comments'    => 'Create additional posts in topics',
+	'forums_faker_items_comment_range'   => 'Post creation count',
+	'forums_faker_items_add_tags'        => 'Add tags to topics',
+	'forums_faker_items_after_posting'   => 'After posting...',
 
-	/* Member Generator */
+	# Posts
+	'menu__faker_forums_TopicPost'  => 'Topic Posts',
+
+	'forums_faker_comments_title'                => 'Generate Topic Posts',
+	'forums_faker_comments_generator_message'    => 'Generating topic posts in in %s',
+
+	'forums_faker_comments_item_url'        => 'Topic URL',
+	'forums_faker_comments_author_type'     => 'Author type',
+	'forums_faker_comments_author'          => 'Member name',
+	'forums_faker_comments_comment_range'   => 'Post creation count',
+	'forums_faker_comments_hide_comment'    => 'Hide posts',
+
+	/********************************
+	 * Member Generators            *
+	 ********************************/
 	'menu__faker_membergen'         => 'Member Generator',
 	'menu__faker_membergen_member'  => 'Member Accounts',
 
