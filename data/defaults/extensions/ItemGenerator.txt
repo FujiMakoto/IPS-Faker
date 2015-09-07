@@ -52,7 +52,7 @@ class _{class} extends \IPS\faker\Faker\Item
 	/**
 	 * @brief   Generator form title language string
 	 */
-	public static $title = '{app}_faker_item_form_title';
+	public static $title = '{app}_faker_items_title';
 
 	/**
 	 * @brief   Generator progress message language string
@@ -67,7 +67,7 @@ class _{class} extends \IPS\faker\Faker\Item
 	 *
 	 * @return  \IPS\Content\Item
 	 */
-	public static function generateSingle( \IPS\Node\Model $node = null, array $values )
+	public function generateSingle( \IPS\Node\Model $node = null, array $values )
 	{
 		$generator = new \IPS\faker\Content\Generator();
 		$contentItemClass = static::$contentItemClass;
@@ -126,7 +126,7 @@ class _{class} extends \IPS\faker\Faker\Item
 	 *
 	 * @return	\IPS\faker\Decorators\Form
 	 */
-	public static function buildGenerateForm( &$form )
+	public function buildGenerateForm( &$form )
 	{
 		$form->add( new \IPS\Helpers\Form\Node( 'nodes', null, true, array(
 			'url'					=> \IPS\Http\Url::internal( 'app={app}&module={app}&controller={app}&do=createMenu' ),
