@@ -88,19 +88,21 @@ abstract class _Item implements Extensible
 	/**
 	 * Bulk process generations
 	 *
-	 * @param   array|null  $values
+	 * @param   array       $extData            Extension data ( $ext, $extApp, $extension, $controller )
+	 * @param   array|null  $values             Form submission values
 	 * @return  \IPS\Helpers\MultipleRedirect
 	 */
-	public function generateBulk( $values=NULL )
+	public function generateBulk( array $extData, $values=NULL )
 	{
-		list( $ext, $extApp, $extension, $controller ) = $this->extData();
+		list( $ext, $extApp, $extension, $controller ) = $extData;
+		$vCookie = $extApp . '_faker_' . $controller . '_generator_values';
+		$mCookie = $extApp . '_faker_' . $controller . '_generator_map';
 
 		/* If this is a form submission, store our values now */
-		$vCookie = $ext::$app . '_faker_' . static::$controller . '_generator_values';
 		if ( $values )
 		{
-			unset( \IPS\Request::i()->cookie['faker_generator_values'] );
-			unset( \IPS\Request::i()->cookie['faker_generator_map'] );
+			unset( \IPS\Request::i()->cookie[ $vCookie ] );
+			unset( \IPS\Request::i()->cookie[ $mCookie ] );
 			\IPS\Request::i()->setCookie( $vCookie, json_encode($values) );
 		}
 		$values = $values ?: json_decode(\IPS\Request::i()->cookie[ $vCookie ], true);
@@ -110,7 +112,6 @@ abstract class _Item implements Extensible
 		 * How many items should we generate for each node?
 		 * We calculate this information beforehand so we can track our progress in MultipleRedirect
 		 */
-		$mCookie = $ext::$app . '_faker_' . static::$controller . '_generator_map';
 		$nodeMap = isset( \IPS\Request::i()->cookie[ $mCookie ] )
 			? json_decode( \IPS\Request::i()->cookie[ $mCookie ], true )
 			: NULL;
@@ -128,7 +129,6 @@ abstract class _Item implements Extensible
 		$total = $nodeMap['total'];
 
 		/* Generate the MultipleRedirect page */
-		\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack('foo');
 		$processUrl = \IPS\Http\Url::internal(
 			"app=faker&module=generator&controller={$controller}&extApp={$extApp}&extension={$extension}&do=process"
 		);
@@ -162,7 +162,7 @@ abstract class _Item implements Extensible
 				{
 					++$count;
 					--$limit;
-					$itemsGenerated[] = $ext::generateSingle( $containerNodeClass::load( $node ), $values );
+					$itemsGenerated[] = $ext::generateSingle( $node, $values );
 				}
 
 				/* If we've cleared out this node, remove it from our map and proceed to the next one */

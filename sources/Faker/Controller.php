@@ -66,7 +66,8 @@ class _Controller extends \IPS\Dispatcher\Controller
 	 */
 	protected function manage()
 	{
-		list( $ext, $extApp, $extension, $controller ) = $this->extData();
+		$extData = $this->extData();
+		list( $ext, $extApp, $extension, $controller ) = $extData;
 
 		/* Build the generator form */
 		$form = new \IPS\faker\Decorators\Form( 'form', 'faker_form_generate', \IPS\Http\Url::internal(
@@ -77,7 +78,7 @@ class _Controller extends \IPS\Dispatcher\Controller
 
 		if ( $values = $form->values() )
 		{
-			$ext->generateBulk( $values );
+			\IPS\Output::i()->output = (string) $ext->generateBulk( $extData, $values );
 			return;
 		}
 
@@ -92,11 +93,12 @@ class _Controller extends \IPS\Dispatcher\Controller
 	 */
 	public function process()
 	{
-		list( $ext ) = $this->extData();
+		$extData = $this->extData();
+		$ext = $extData[0];
 
 		/* This should usually be overridden in generateBulk(), but just in case it's not, we set the title here */
 		\IPS\Output::i()->title = \IPS\Member::loggedIn()->language()->addToStack( $ext::$generatorTitle );
 
-		$ext->generateBulk();
+		\IPS\Output::i()->output = (string) $ext->generateBulk( $extData );
 	}
 }

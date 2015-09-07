@@ -23,10 +23,11 @@ interface Extensible
 	/**
 	 * Bulk process generations
 	 *
-	 * @param   array|null  $values
+	 * @param   array       $extData            Extension data ( $ext, $extApp, $extension, $controller )
+	 * @param   array|null  $values             Form submission values
 	 * @return  \IPS\Helpers\MultipleRedirect
 	 */
-	public function generateBulk( $values=NULL );
+	public function generateBulk( array $extData, $values=NULL );
 
 	/**
 	 * Build a generator form for this content item
