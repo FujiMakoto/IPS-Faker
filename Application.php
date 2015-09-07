@@ -58,9 +58,9 @@ class _Application extends \IPS\Application
 			$extName = implode( '_', array_slice($splitKey, 1) );
 			$menu[ $app ][ $extName ] = array(
 				'tab'           => 'faker',
-				'controller'    => 'items',  // @TODO: We need to discern the controller
+				'controller'    => $extension::$_controller,
 				'do'            => "manage&module=generator&extApp={$app}&extension={$extName}",  // @TODO: This is a hack, we're just overriding the module here by re-declaring it
-				'restriction'   => NULL,
+				'restriction'   => $extension::$acpRestriction,
 			);
 		}
 

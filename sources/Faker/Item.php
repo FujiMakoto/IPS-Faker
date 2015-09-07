@@ -20,6 +20,11 @@ abstract class _Item implements Extensible
 	protected static $_commentExtension;
 
 	/**
+	 * @brief   Controller name for menu generation, this should not be modified
+	 */
+	public static $_controller = 'items';
+
+	/**
 	 * @brief   Application name
 	 */
 	public static $app;
