@@ -67,7 +67,7 @@ class _TopicPost extends \IPS\faker\Faker\Comment
 	/**
 	 * Generate a fake content comment
 	 *
-	 * @param	\IPS\Content\Item   $item   The content item
+	 * @param	\IPS\Content\Item   $topic  The content item
 	 * @param   array               $values Generator form values
 	 *
 	 * @return  \IPS\Content\Comment
@@ -103,16 +103,17 @@ class _TopicPost extends \IPS\faker\Faker\Comment
 	}
 
 	/**
-	 * Build a generator form for this content item
+	 * Build a generator form for this comment
 	 *
-	 * @return	\IPS\faker\Decorators\Form
+	 * @param   \IPS\faker\Decorators\Form  $form
+	 * @return  void
 	 */
 	public function buildGenerateForm( &$form )
 	{
 		$form->add( new \IPS\Helpers\Form\Url( 'item_url', NULL, TRUE ) );
 		$form->add( new \IPS\Helpers\Form\Select( 'author_type', 'random_fake', TRUE, array(
 			'options' => array( 'random_fake' => 'random_fake', 'guest' => 'guest' ), 'unlimited' => '-1',
-			'unlimitedLang' => "forums_faker_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
+			'unlimitedLang' => "faker_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
 		) ) );
 		$form->add( new \IPS\Helpers\Form\Member( 'author', NULL, FALSE, array(), NULL, NULL, NULL, 'faker_custom_author' ) );
 		$form->add( new \IPS\Helpers\Form\NumberRange('comment_range', array( 'start' => 3, 'end' => 5 ), TRUE, array(

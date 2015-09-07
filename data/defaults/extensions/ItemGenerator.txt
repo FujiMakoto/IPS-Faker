@@ -57,14 +57,13 @@ class _{class} extends \IPS\faker\Faker\Item
 	/**
 	 * @brief   Generator progress message language string
 	 */
-	public static $message = '{app}_faker_item_generator_message';
+	public static $message = '{app}_faker_items_generator_message';
 
 	/**
 	 * Generate a fake content item
 	 *
 	 * @param	\IPS\Node\Model	$node	The item container
 	 * @param   array           $values Generator form values
-	 *
 	 * @return  \IPS\Content\Item
 	 */
 	public function generateSingle( \IPS\Node\Model $node = null, array $values )
@@ -124,7 +123,8 @@ class _{class} extends \IPS\faker\Faker\Item
 	/**
 	 * Build a generator form for this content item
 	 *
-	 * @return	\IPS\faker\Decorators\Form
+	 * @param   \IPS\faker\Decorators\Form  $form
+	 * @return  void
 	 */
 	public function buildGenerateForm( &$form )
 	{

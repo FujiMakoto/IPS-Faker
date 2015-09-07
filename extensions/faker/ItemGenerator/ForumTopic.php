@@ -52,19 +52,18 @@ class _ForumTopic extends \IPS\faker\Faker\Item
 	/**
 	 * @brief   Generator form title language string
 	 */
-	public static $title = 'forums_faker_item_title';
+	public static $title = 'forums_faker_items_title';
 
 	/**
 	 * @brief   Generator progress message language string
 	 */
-	public static $message = 'forums_faker_item_generator_message';
+	public static $message = 'forums_faker_items_generator_message';
 
 	/**
 	 * Generate a fake forum topic
 	 *
 	 * @param	\IPS\Node\Model	$forum	The forum container
 	 * @param   array           $values Generator form values
-	 *
 	 * @return  \IPS\faker\Content\Forum\Topic
 	 */
 	public function generateSingle( \IPS\Node\Model $forum = null, array $values )
@@ -123,7 +122,8 @@ class _ForumTopic extends \IPS\faker\Faker\Item
 	/**
 	 * Build a generator form for this content item
 	 *
-	 * @return	\IPS\faker\Decorators\Form
+	 * @param   \IPS\faker\Decorators\Form  $form
+	 * @return  void
 	 */
 	public function buildGenerateForm( &$form )
 	{
@@ -134,7 +134,7 @@ class _ForumTopic extends \IPS\faker\Faker\Item
 		) ) );
 		$form->add( new \IPS\Helpers\Form\Select( 'author_type', 'random_fake', true, array(
 			'options' => array( 'random_fake' => 'random_fake', 'guest' => 'guest' ), 'unlimited' => '-1',
-			'unlimitedLang' => "forums_faker_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
+			'unlimitedLang' => "faker_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
 		) ) );
 		$form->add( new \IPS\Helpers\Form\Member( 'author', null, false, array(), null, null, null, 'faker_custom_author' ) );
 		$form->add( new \IPS\Helpers\Form\NumberRange('item_range', array( 'start' => 3, 'end' => 5 ), true, array(
