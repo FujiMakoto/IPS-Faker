@@ -86,7 +86,7 @@ class _Forum extends \IPS\faker\Content\Node
 		);
 
 		if ( $values['description'] )
-			$nodeValues['forum_description'] = $this->generator->comment();
+			$nodeValues['forum_description'] = $this->generator->description();
 
 		if ( $parent )
 		{
@@ -111,6 +111,78 @@ class _Forum extends \IPS\faker\Content\Node
 		}
 
 		$node->saveForm( $node->formatFormValues( $nodeValues ) );
+
+		/**
+		 * Permissions
+		 */
+		/* Recommended permissions */
+		$current = array();
+		foreach ( $nodeClass::$permissionMap as $k => $v )
+		{
+			switch ( $k )
+			{
+				case 'view':
+				case 'read':
+					$current["perm_{$v}"] = '*';
+					break;
+
+				case 'add':
+				case 'reply':
+				case 'review':
+				case 'upload':
+				case 'download':
+				default:
+					$current["perm_{$v}"] = implode( ',', array_keys( \IPS\Member\Group::groups( TRUE, FALSE ) ) );
+					break;
+			}
+		}
+
+		$_perms = array();
+
+		/* Check for "all" checkboxes */
+		foreach ( $nodeClass::$permissionMap as $k => $v )
+		{
+			if ( isset( \IPS\Request::i()->__all[ $k ] ) )
+			{
+				$_perms[ $v ] = '*';
+			}
+			else
+			{
+				$_perms[ $v ] = array();
+			}
+		}
+
+		/* Prepare insert */
+		$insert = array( 'app' => $nodeClass::$permApp, 'perm_type' => $nodeClass::$permType, 'perm_type_id' => $node->_id );
+		if ( isset( $current['perm_id'] ) )
+		{
+			$insert['perm_id'] = $current['perm_id'];
+		}
+
+		/* Loop groups */
+		foreach ( $values as $group => $perms )
+		{
+			foreach ( $nodeClass::$permissionMap as $k => $v )
+			{
+				if ( isset( $perms[ $k ] ) and $perms[ $k ] and is_array( $current[ $v ] ) )
+				{
+					$current[ $v ][] = $group;
+				}
+			}
+		}
+
+		/* Finalise */
+		foreach ( $current as $k => $v )
+		{
+			$insert[ $k ] = is_array( $v ) ? implode( $v, ',' ) : $v;
+		}
+
+		\IPS\Db::i()->delete( 'core_permission_index', array( 'app=? AND perm_type=? AND perm_type_id=?', $nodeClass::$permApp, $nodeClass::$permType, $node->_id ) );
+
+		/* Insert */
+		\IPS\Db::i()->insert( 'core_permission_index', $insert );
+
+
 		return $node;
 	}
 
