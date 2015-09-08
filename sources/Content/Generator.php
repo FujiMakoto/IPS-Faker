@@ -78,7 +78,7 @@ class _Generator
 	 */
 	public function description( $maxSentences = 3 )
 	{
-		return $this->faker->paragraph( mt_rand(1, $maxSentences) );
+		return $this->faker->sentences( mt_rand(1, $maxSentences), TRUE );
 	}
 
 	/**
@@ -92,7 +92,7 @@ class _Generator
 	public function tags( $prefixChance = 25, $min = 1, $max = 7 )
 	{
 		$tags = $this->faker->words( mt_rand( $min, $max ) );
-		$prefix = ( mt_rand( 0, 100 ) < $prefixChance ) ? array_rand( $tags ) : null;  // 25% chance to add a tag prefix
+		$prefix = ( mt_rand( 0, 100 ) < $prefixChance ) ? array_rand( $tags ) : NULL;  // 25% chance to add a tag prefix
 
 		return array( 'tags' => $tags, 'prefix' => $prefix );
 	}
