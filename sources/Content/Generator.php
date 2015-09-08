@@ -73,6 +73,17 @@ class _Generator
 	}
 
 	/**
+	 * Generate a description
+	 *
+	 * @param   int $maxSentences
+	 * @return  string
+	 */
+	public function description( $maxSentences = 3 )
+	{
+		return $this->faker->paragraph( mt_rand(1, $maxSentences) );
+	}
+
+	/**
 	 * Generate an array of tags
 	 *
 	 * @param	int	$prefixChance	Percent chance the result will have a prefix assigned
