@@ -12,8 +12,8 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 class _Generator
 {
 	/**
-	 * @brief	Faker instance
-	 * @var		\Faker
+	 * @brief   Faker instance
+	 * @var     \Faker
 	 */
 	public $faker;
 
@@ -28,9 +28,8 @@ class _Generator
 	/**
 	 * Generate a title
 	 *
-	 * @param	int	$maxChars	Maximum character length of the title
-	 *
-	 * @return	string
+	 * @param   int $maxChars   Maximum character length of the title
+	 * @return  string
 	 */
 	public function title( $maxChars = 50 )
 	{
@@ -40,13 +39,12 @@ class _Generator
 	/**
 	 * Generate a comment
 	 *
-	 * @param	int 	$minParagraphs	Minimum number of paragraphs
-	 * @param	int 	$maxParagraphs	Maximum number of paragraphs
-	 * @param 	int 	$images			Number of images to include in the comment
-	 * @param	int 	$minSentences	Minimum number of sentences per paragraph
-	 * @param	int 	$maxSentences	Maximum number of sentences per paragraph
-	 *
-	 * @return	string
+	 * @param   int     $minParagraphs  Minimum number of paragraphs
+	 * @param   int     $maxParagraphs  Maximum number of paragraphs
+	 * @param   int     $images         Number of images to include in the comment
+	 * @param   int     $minSentences   Minimum number of sentences per paragraph
+	 * @param   int     $maxSentences   Maximum number of sentences per paragraph
+	 * @return  string
 	 */
 	public function comment( $minParagraphs = 1, $maxParagraphs = 4, $images = 0, $minSentences = 3, $maxSentences = 9 )
 	{
@@ -86,11 +84,10 @@ class _Generator
 	/**
 	 * Generate an array of tags
 	 *
-	 * @param	int	$prefixChance	Percent chance the result will have a prefix assigned
-	 * @param	int	$min			Minimum number of tags
-	 * @param	int	$max			Maximum number of tags
-	 *
-	 * @return	array
+	 * @param   int $prefixChance   Percent chance the result will have a prefix assigned
+	 * @param   int $min            Minimum number of tags
+	 * @param   int $max            Maximum number of tags
+	 * @return  array
 	 */
 	public function tags( $prefixChance = 25, $min = 1, $max = 7 )
 	{
@@ -103,7 +100,7 @@ class _Generator
 	/**
 	 * Generate a username
 	 *
-	 * @return	string
+	 * @return  string
 	 */
 	public function userName()
 	{
@@ -113,7 +110,7 @@ class _Generator
 	/**
 	 * Generate an email address
 	 *
-	 * @return	string
+	 * @return  string
 	 */
 	public function email()
 	{
@@ -123,11 +120,10 @@ class _Generator
 	/**
 	 * Generate URL to a random photo
 	 *
-	 * @param    null|string $category
-	 * @param    int         $width
-	 * @param    int         $height
-	 *
-	 * @return string
+	 * @param   null|string $category
+	 * @param   int         $width
+	 * @param   int         $height
+	 * @return  string
 	 */
 	public function photoUrl( $category = null, $width = 640, $height = 480 )
 	{
@@ -137,7 +133,7 @@ class _Generator
 	/**
 	 * Generate a password
 	 *
-	 * @return	string
+	 * @return  string
 	 */
 	public function password()
 	{
@@ -147,7 +143,7 @@ class _Generator
 	/**
 	 * Return a random fake member account (or guest account if none exist)
 	 *
-	 * @return	\IPS\faker\Content\Member
+	 * @return  \IPS\faker\Content\Member
 	 */
 	public function fakeMember()
 	{
@@ -161,7 +157,7 @@ class _Generator
 	/**
 	 * Generate a random guest member object
 	 *
-	 * @return	\IPS\Member
+	 * @return  \IPS\Member
 	 */
 	public function guest()
 	{
@@ -174,9 +170,8 @@ class _Generator
 	/**
 	 * Generate a fake IP address
 	 *
-	 * @param	int	$ipv6Chance	Percent chance the returned address will be in ipv6 format
-	 *
-	 * @return	string
+	 * @param   int $ipv6Chance	Percent chance the returned address will be in ipv6 format
+	 * @return  string
 	 */
 	public function ipAddress( $ipv6Chance = 25 )
 	{
