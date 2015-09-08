@@ -22,7 +22,7 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 /**
  * Faker Comment Generator Extension: {class}
  */
-class _{class} extends \IPS\faker\Faker\Comment
+class _{class} extends \IPS\faker\Content\Comment
 {
 	/**
 	 * @brief   Application name

@@ -1,6 +1,6 @@
 <?php
 
-namespace IPS\faker\Faker;
+namespace IPS\faker\Content;
 
 /* To prevent PHP errors (extending class does not exist) revealing path */
 if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )

@@ -22,7 +22,7 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 /**
  * Faker Content Generator Extension: ForumTopic
  */
-class _ForumTopic extends \IPS\faker\Faker\Item
+class _ForumTopic extends \IPS\faker\Content\Item
 {
 	/**
 	 * @brief   Application name
