@@ -1,0 +1,124 @@
+<?php
+/**
+ * @brief		Faker Node Generator : {class}
+ * @author		<a href='https://www.Makoto.io'>Makoto Fujimoto</a>
+ * @copyright	(c) 2015 www.Makoto.io
+ * @license		<a href='http://opensource.org/licenses/MIT'>MIT License</a>
+ * @package		Faker
+{subpackage}
+ * @since		{date}
+ * @version		0.2.0
+ */
+
+namespace IPS\{app}\extensions\faker\NodeGenerator;
+
+/* To prevent PHP errors (extending class does not exist) revealing path */
+if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
+{
+	header( ( isset( $_SERVER['SERVER_PROTOCOL'] ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0' ) . ' 403 Forbidden' );
+	exit;
+}
+
+/**
+ * Faker Node Generator Extension: {class}
+ */
+class _{class} extends \IPS\faker\Content\Node
+{
+	/**
+	 * @brief   Application name
+	 */
+	public static $app = '{app}';
+
+	/**
+	 * @brief   AdminCP tab restriction
+	 */
+	public static $acpRestriction = 'faker_generate';
+
+	/**
+	 * @brief   Item generator extension
+	 */
+	public static $commentExtension = 'ItemGenerator';
+
+	/**
+	 * @brief	Node Class
+	 */
+	public static $containerNodeClass = 'IPS\{app}\Node';
+
+	/**
+	 * @brief	Comment Class
+	 */
+	public static $contentCommentClass = 'IPS\{app}\Comment';
+
+	/**
+	 * @brief   Generator form title language string
+	 */
+	public static $title = '{app}_faker_nodes_title';
+
+	/**
+	 * @brief   Generator progress message language string
+	 */
+	public static $message = '{app}_faker_nodes_generator_message';
+
+	/**
+	 * Generate a fake node
+	 *
+	 * @param   array   $values Generator form values
+	 * @return  \IPS\Content\Comment
+	 */
+	public function generateSingle( array $values )
+	{
+		$commentClass = static::$commentClass;
+
+		/* Generate the author */
+		if ( $values['author'] )
+		{
+			$member = $values['author'];
+		}
+		elseif ( $values['author_type'] == 'random_fake' )
+		{
+			$member = $this->generator->fakeMember();
+		}
+		else
+		{
+			$member = $this->generator->guest();
+		}
+
+		/* Create and save the post */
+		$obj = $commentClass::create( $item, $this->generator->comment(), $first, ( !$member->name ) ? NULL : $member->name, $item->hidden() ? FALSE : NULL, $member );
+		$obj->ip_address = $this->generator->ipAddress();
+		$obj->save();
+
+		$itemClass = static::$itemClass;
+		call_user_func_array( array( 'IPS\File', 'claimAttachments' ), array_merge( array( 'newContentItem-' . $item::$application . '/' . $itemClass::$module  . '-' . 0 ), $obj->attachmentIds() ) );
+
+		return $obj;
+	}
+
+	/**
+	 * Build a generator form for this node
+	 *
+	 * @param   \IPS\faker\Decorators\Form  $form
+	 * @return  void
+	 */
+	public function buildGenerateForm( &$form )
+	{
+		$form->add( new \IPS\Helpers\Form\YesNo( 'description', FALSE ) );
+
+		$form->add( new \IPS\Helpers\Form\Node( 'parent_ids', NULL, FALSE, array(
+			'class'		      	=> '\IPS\{app}\Node',
+			'disabled'	      	=> array(),
+			'zeroVal'         	=> 'node_no_parentf',
+			// 'zeroValTogglesOff'	=> array( 'form_new_{app}_type', '{node}_icon' ),
+			'permissionCheck' => function( $node )
+			{
+				return !isset( \IPS\Request::i()->id ) or ( $node->id != \IPS\Request::i()->id and !$node->isChildOf( $node::load( \IPS\Request::i()->id ) ) );
+			}
+		), function( $val )
+		{
+			if ( !$val and \IPS\Request::i()->{app}_type !== 'category' )
+			{
+				throw new \DomainException('{app}_parent_id_error');
+			}
+		} ) );
+	}
+}

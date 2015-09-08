@@ -14,6 +14,7 @@ $lang = array(
 	'r__faker_purge'                    => 'Purge Fake Content',
 
 	/* Extensions */
+	'ext__NodeGenerator'    => 'Generate fake container Nodes (e.g. forums).',
 	'ext__ItemGenerator'    => 'Generate fake Content Item submissions (e.g. forum topics).',
 	'ext__CommentGenerator' => 'Generate fake Content Comment submissions (e.g. forum topic posts).',
 
@@ -22,7 +23,21 @@ $lang = array(
 	 ********************************/
 	'menu__faker_forums'    => 'Forum Generator',
 
-	# Topics
+	# [Node] Forums
+	'menu__faker_forums_Forum'  => 'Forums',
+
+	'forums_faker_nodes_title'              => 'Generate Forums',
+	'forums_faker_nodes_generator_message'  => 'Generating forums in %s',
+
+	'forums_faker_nodes_description'    => 'Include description',
+	'forums_faker_nodes_forum_type'     => 'Type',
+	'forums_faker_nodes_node_range'     => 'Node creation count',
+	'forums_faker_nodes_parent_ids'     => 'Parent Forums',
+	'forums_faker_nodes_icon'           => 'Include icon',
+	'forums_faker_nodes_password_on'    => 'Password protected?',
+	'forums_faker_nodes_password'       => 'Password',
+
+	# [Item] Topics
 	'menu__faker_forums_ForumTopic' => 'Forum Topics',
 
 	'forums_faker_items_title'               => 'Generate Forum Topics',
@@ -37,7 +52,7 @@ $lang = array(
 	'forums_faker_items_add_tags'        => 'Add tags to topics',
 	'forums_faker_items_after_posting'   => 'After posting...',
 
-	# Posts
+	# [Comment] Posts
 	'menu__faker_forums_TopicPost'  => 'Topic Posts',
 
 	'forums_faker_comments_title'                => 'Generate Topic Posts',
