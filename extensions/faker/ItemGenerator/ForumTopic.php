@@ -42,7 +42,7 @@ class _ForumTopic extends \IPS\faker\Content\Item
 	/**
 	 * @brief	Node Class
 	 */
-	public static $containerNodeClass = 'IPS\forums\Forum';
+	public static $nodeClass = 'IPS\forums\Forum';
 
 	/**
 	 * @brief	[Content\Comment]	Item Class
@@ -137,7 +137,7 @@ class _ForumTopic extends \IPS\faker\Content\Item
 	{
 		$form->add( new \IPS\Helpers\Form\Node( 'nodes', null, true, array(
 			'url'					=> \IPS\Http\Url::internal( 'app=forums&module=forums&controller=forums&do=createMenu' ),
-			'class'					=> static::$containerNodeClass,
+			'class'					=> static::$nodeClass,
 			'multiple'				=> true,
 		) ) );
 		$form->add( new \IPS\Helpers\Form\Select( 'author_type', 'random_fake', true, array(

@@ -32,12 +32,7 @@ abstract class _Node implements Extensible
 	/**
 	 * @brief	Node Class
 	 */
-	public static $containerNodeClass;
-
-	/**
-	 * @brief	Item Class
-	 */
-	public static $itemClass;
+	public static $nodeClass;
 
 	/**
 	 * @brief   Generator form title language string
@@ -63,35 +58,77 @@ abstract class _Node implements Extensible
 		$this->generator = new \IPS\faker\Content\Generator();
 	}
 
-	/**
-	 * Load the Comments extension for this Item
-	 *
-	 * @return  mixed   The extension if it exists, otherwise NULL
-	 */
-	protected function commentExt()
+	public function setPermissions( \IPS\Node\Model $node )
 	{
-		/* Return the extension if it has already been loaded */
-		if ( static::$_commentExtension ) {
-			return static::$_commentExtension;
-		}
+		$nodeClass = static::$nodeClass;
 
-		$extensions = \IPS\faker\Faker::allExtensions( \IPS\faker\Faker::COMMENTS );
-
-		/* Do we have an explicitly defined app for the Comment extension? */
-		$app = static::$app;
-		$commentExtension = static::$commentExtension;
-		if ( is_array( $commentExtension ) )
+		/* Recommended permissions */
+		$current = array();
+		foreach ( $nodeClass::$permissionMap as $k => $v )
 		{
-			$app = $commentExtension[0];
-			$commentExtension = $commentExtension[1];
+			switch ( $k )
+			{
+				case 'view':
+				case 'read':
+					$current["perm_{$v}"] = '*';
+					break;
+
+				case 'add':
+				case 'reply':
+				case 'review':
+				case 'upload':
+				case 'download':
+				default:
+					$current["perm_{$v}"] = implode( ',', array_keys( \IPS\Member\Group::groups( TRUE, FALSE ) ) );
+					break;
+			}
 		}
 
-		/* Return the extension if it exists */
-		if ( isset($extensions[ $app . '_' . $commentExtension ]) ) {
-			return $extensions[ $app . '_' . $commentExtension ];
+		$_perms = array();
+
+		/* Check for "all" checkboxes */
+		foreach ( $nodeClass::$permissionMap as $k => $v )
+		{
+			if ( isset( \IPS\Request::i()->__all[ $k ] ) )
+			{
+				$_perms[ $v ] = '*';
+			}
+			else
+			{
+				$_perms[ $v ] = array();
+			}
 		}
 
-		return NULL;
+		/* Prepare insert */
+		$insert = array( 'app' => $nodeClass::$permApp, 'perm_type' => $nodeClass::$permType, 'perm_type_id' => $node->_id );
+		if ( isset( $current['perm_id'] ) )
+		{
+			$insert['perm_id'] = $current['perm_id'];
+		}
+
+		/* Loop groups */
+		/*foreach ( $current as $group => $perms )
+		{
+			foreach ( $nodeClass::$permissionMap as $k => $v )
+			{
+				if ( isset( $perms[ $k ] ) and $perms[ $k ] and is_array( $current[ $v ] ) )
+				{
+					$current[ $v ][] = $group;
+				}
+			}
+		}*/
+
+		/* Finalise */
+		foreach ( $current as $k => $v )
+		{
+			$insert[ $k ] = is_array( $v ) ? implode( $v, ',' ) : $v;
+		}
+
+		/* Delete existing permissions */
+		\IPS\Db::i()->delete( 'core_permission_index', array( 'app=? AND perm_type=? AND perm_type_id=?', $nodeClass::$permApp, $nodeClass::$permType, $node->_id ) );
+
+		/* Insert */
+		\IPS\Db::i()->insert( 'core_permission_index', $insert );
 	}
 
 	/**

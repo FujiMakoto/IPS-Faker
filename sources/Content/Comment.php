@@ -15,11 +15,6 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 abstract class _Comment implements Extensible
 {
 	/**
-	 * @brief   Comment extension container
-	 */
-	protected static $_commentExtension;
-
-	/**
 	 * @brief   Controller name for menu generation, this should not be modified
 	 */
 	public static $_controller = 'comments';
@@ -35,19 +30,14 @@ abstract class _Comment implements Extensible
 	public static $acpRestriction;
 
 	/**
-	 * @brief   Comment generator extension
-	 */
-	public static $commentExtension;
-
-	/**
-	 * @brief	Node Class
-	 */
-	public static $containerNodeClass;
-
-	/**
-	 * @brief	Item Class
+	 * @brief	[Content\Comment]	Item Class
 	 */
 	public static $itemClass;
+
+	/**
+	 * @brief	[Content\Item]	Comment Class
+	 */
+	public static $commentClass;
 
 	/**
 	 * @brief   Generator form title language string
@@ -71,37 +61,6 @@ abstract class _Comment implements Extensible
 	public function __construct()
 	{
 		$this->generator = new \IPS\faker\Content\Generator();
-	}
-
-	/**
-	 * Load the Comments extension for this Item
-	 *
-	 * @return  mixed   The extension if it exists, otherwise NULL
-	 */
-	protected function commentExt()
-	{
-		/* Return the extension if it has already been loaded */
-		if ( static::$_commentExtension ) {
-			return static::$_commentExtension;
-		}
-
-		$extensions = \IPS\faker\Faker::allExtensions( \IPS\faker\Faker::COMMENTS );
-
-		/* Do we have an explicitly defined app for the Comment extension? */
-		$app = static::$app;
-		$commentExtension = static::$commentExtension;
-		if ( is_array( $commentExtension ) )
-		{
-			$app = $commentExtension[0];
-			$commentExtension = $commentExtension[1];
-		}
-
-		/* Return the extension if it exists */
-		if ( in_array( $app . '_' . $commentExtension, $extensions ) ) {
-			return static::$_commentExtension = $extensions[ $app . '_' . $commentExtension ];
-		}
-
-		return NULL;
 	}
 
 	/**

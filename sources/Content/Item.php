@@ -15,11 +15,6 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 abstract class _Item implements Extensible
 {
 	/**
-	 * @brief   Comment extension container
-	 */
-	protected static $_commentExtension;
-
-	/**
 	 * @brief   Controller name for menu generation, this should not be modified
 	 */
 	public static $_controller = 'items';
@@ -42,12 +37,12 @@ abstract class _Item implements Extensible
 	/**
 	 * @brief	Node Class
 	 */
-	public static $containerNodeClass;
+	public static $nodeClass;
 
 	/**
-	 * @brief	Item Class
+	 * @brief	[Content\Comment]	Item Class
 	 */
-	public static $contentItemClass;
+	public static $itemClass;
 
 	/**
 	 * @brief   Generator form title language string
@@ -58,6 +53,11 @@ abstract class _Item implements Extensible
 	 * @brief   Generator progress message language string
 	 */
 	public static $message;
+
+	/**
+	 * @brief   Comment extension container
+	 */
+	protected $_commentExtension = NULL;
 
 	/**
 	 * @brief   Faker decorator container
@@ -81,8 +81,8 @@ abstract class _Item implements Extensible
 	protected function commentExt()
 	{
 		/* Return the extension if it has already been loaded */
-		if ( static::$_commentExtension ) {
-			return static::$_commentExtension;
+		if ( $this->_commentExtension ) {
+			return $this->_commentExtension;
 		}
 
 		$extensions = \IPS\faker\Faker::allExtensions( \IPS\faker\Faker::COMMENTS );
@@ -98,7 +98,7 @@ abstract class _Item implements Extensible
 
 		/* Return the extension if it exists */
 		if ( isset($extensions[ $app . '_' . $commentExtension ]) ) {
-			return $extensions[ $app . '_' . $commentExtension ];
+			return $this->_commentExtension = $extensions[ $app . '_' . $commentExtension ];
 		}
 
 		return NULL;

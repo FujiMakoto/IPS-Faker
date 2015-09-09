@@ -35,19 +35,14 @@ class _{class} extends \IPS\faker\Content\Comment
 	public static $acpRestriction = 'faker_generate';
 
 	/**
-	 * @brief   Item generator extension
+	 * @brief	[Content\Comment]	Item Class
 	 */
-	public static $commentExtension = 'ItemGenerator';
+	public static $itemClass = 'IPS\forums\Topic';
 
 	/**
-	 * @brief	Node Class
+	 * @brief	[Content\Item]	Comment Class
 	 */
-	public static $containerNodeClass = 'IPS\{app}\Node';
-
-	/**
-	 * @brief	Comment Class
-	 */
-	public static $contentCommentClass = 'IPS\{app}\Comment';
+	public static $commentClass = 'IPS\{app}\Comment';
 
 	/**
 	 * @brief   Generator form title language string
@@ -65,7 +60,6 @@ class _{class} extends \IPS\faker\Content\Comment
 	 * @param	\IPS\Content\Item   $item   The content item
 	 * @param   array               $values Generator form values
 	 * @param   bool                $first  Indicates this is the first comment for an item
-	 *
 	 * @return  \IPS\Content\Comment
 	 */
 	public function generateSingle( \IPS\Content\Item $item, array $values, $first=FALSE )

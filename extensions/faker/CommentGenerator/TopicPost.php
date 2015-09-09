@@ -35,16 +35,6 @@ class _TopicPost extends \IPS\faker\Content\Comment
 	public static $acpRestriction = 'faker_generate';
 
 	/**
-	 * @brief   Item generator extension
-	 */
-	public static $commentExtension = 'ForumTopic';
-
-	/**
-	 * @brief	Node Class
-	 */
-	public static $containerNodeClass = 'IPS\forums\Forum';
-
-	/**
 	 * @brief	[Content\Comment]	Item Class
 	 */
 	public static $itemClass = 'IPS\forums\Topic';
@@ -70,7 +60,6 @@ class _TopicPost extends \IPS\faker\Content\Comment
 	 * @param   \IPS\Content\Item   $topic  The content item
 	 * @param   array               $values Generator form values
 	 * @param   bool                $first  Indicates this is the first comment for an item
-	 *
 	 * @return  \IPS\Content\Comment
 	 */
 	public function generateSingle( \IPS\Content\Item $topic, array $values, $first=FALSE )

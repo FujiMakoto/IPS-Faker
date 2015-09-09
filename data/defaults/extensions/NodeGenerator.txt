@@ -35,19 +35,9 @@ class _{class} extends \IPS\faker\Content\Node
 	public static $acpRestriction = 'faker_generate';
 
 	/**
-	 * @brief   Item generator extension
-	 */
-	public static $commentExtension = 'ItemGenerator';
-
-	/**
 	 * @brief	Node Class
 	 */
-	public static $containerNodeClass = 'IPS\{app}\Node';
-
-	/**
-	 * @brief	Comment Class
-	 */
-	public static $contentCommentClass = 'IPS\{app}\Comment';
+	public static $nodeClass = 'IPS\{app}\Node';
 
 	/**
 	 * @brief   Generator form title language string
@@ -62,10 +52,11 @@ class _{class} extends \IPS\faker\Content\Node
 	/**
 	 * Generate a fake node
 	 *
-	 * @param   array   $values Generator form values
-	 * @return  \IPS\Content\Comment
+	 * @param   \IPS\Node\Model|null    $parent Parent node, or NULL to generate a root node
+	 * @param   array                   $values Generator form values
+	 * @return  \IPS\Node\Model
 	 */
-	public function generateSingle( array $values )
+	public function generateSingle( $parent=NULL, array $values )
 	{
 		$commentClass = static::$commentClass;
 
