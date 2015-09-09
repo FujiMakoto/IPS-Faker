@@ -18,9 +18,10 @@ class _Faker
 	/**
 	 * Generators
 	 */
-	const NODES     = 'NodeGenerator';
-	const ITEMS     = 'ItemGenerator';
-	const COMMENTS  = 'CommentGenerator';
+	const NODES             = 'NodeGenerator';
+	const ITEMS             = 'ItemGenerator';
+	const COMMENTS          = 'CommentGenerator';
+	const ACTIVERECORDS     = 'ActiveRecordGenerator';
 
 	/**
 	 * Retrieve generator extensions
@@ -36,7 +37,8 @@ class _Faker
 			$rawExtensions = array_merge(
 				\IPS\Application::allExtensions( 'faker', static::NODES ),
 				\IPS\Application::allExtensions( 'faker', static::ITEMS ),
-				\IPS\Application::allExtensions( 'faker', static::COMMENTS )
+				\IPS\Application::allExtensions( 'faker', static::COMMENTS ),
+				\IPS\Application::allExtensions( 'faker', static::ACTIVERECORDS )
 			);
 		}
 		else
@@ -51,7 +53,7 @@ class _Faker
 			if ( property_exists($extension, 'app') )
 			{
 				$splitKey = explode( '_', $key );
-				$splitKey[0] = $extension::$app;
+				$splitKey = array( $extension::$app, end($splitKey) );
 
 				$key = implode( '_', $splitKey );
 			}

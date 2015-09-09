@@ -43,10 +43,11 @@ class _Application extends \IPS\Application
 			$splitKey = explode('_', $key);
 
 			/* What app is this extension for? */
-			$app = property_exists( $extension, 'app' ) ? $extension::$app : $splitKey[0];
+			$app = property_exists( $extension, 'app' ) ? $extension::$app : implode( '_', array_slice($splitKey, 0, -1) );
 
 			/* Make sure the application is enabled */
 			if ( !\IPS\Application::appIsEnabled( $app ) ) {
+				die(var_dump($app));
 				continue;
 			}
 
