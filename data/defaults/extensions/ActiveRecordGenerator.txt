@@ -84,6 +84,9 @@ class _{class} extends \IPS\faker\Content\ActiveRecord
 		$obj->processForm( $recordValues );
 		$obj->save();
 
+		/* Map the ActiveRecord entry so we can delete it later */
+		$this->map( static::$activeRecordClass, $obj->id );
+
 		return \IPS\Member::loggedIn()->language()->addToStack( static::$message );
 	}
 

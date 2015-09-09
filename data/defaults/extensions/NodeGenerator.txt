@@ -79,6 +79,9 @@ class _{class} extends \IPS\faker\Content\Node
 		$obj->ip_address = $this->generator->ipAddress();
 		$obj->save();
 
+		/* Map the Node entry so we can delete it later */
+		$this->map( static::$nodeClass, $node->_id );
+
 		$itemClass = static::$itemClass;
 		call_user_func_array( array( 'IPS\File', 'claimAttachments' ), array_merge( array( 'newContentItem-' . $item::$application . '/' . $itemClass::$module  . '-' . 0 ), $obj->attachmentIds() ) );
 

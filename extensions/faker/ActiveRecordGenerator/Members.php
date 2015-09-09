@@ -85,6 +85,7 @@ class _Members extends \IPS\faker\Content\ActiveRecord
 		}
 
 		$member->save();
+		$this->map( static::$activeRecordClass, $member->member_id );
 		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, true, array( 'sprintf' => $member->name ) );
 	}
 

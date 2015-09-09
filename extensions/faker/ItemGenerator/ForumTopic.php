@@ -64,7 +64,7 @@ class _ForumTopic extends \IPS\faker\Content\Item
 	 *
 	 * @param	\IPS\Node\Model	$forum	The forum container
 	 * @param   array           $values Generator form values
-	 * @return  \IPS\faker\Content\Forum\Topic
+	 * @return  string  Progress message
 	 */
 	public function generateSingle( \IPS\Node\Model $forum = null, array $values )
 	{
@@ -95,10 +95,12 @@ class _ForumTopic extends \IPS\faker\Content\Item
 		);
 
 		/* Create and save the topic */
-		$obj = \IPS\forums\Topic::createItem( $member, $ipAddress = $this->generator->ipAddress(), new \IPS\DateTime, $forum );
+		$itemClass = static::$itemClass;
+		$obj = $itemClass::createItem( $member, $ipAddress = $this->generator->ipAddress(), new \IPS\DateTime, $forum );
 		$obj->processForm( $topicValues );
 		$obj->faker_fake = 1;
 		$obj->save();
+		$this->map( static::$itemClass, $obj->id );
 
 		/* Create and save the first post in the topic */
 		$comment = $this->commentExt()->generateSingle( $obj, $values, TRUE );

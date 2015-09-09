@@ -101,6 +101,7 @@ class _Forum extends \IPS\faker\Content\Node
 		}
 
 		$node->saveForm( $node->formatFormValues( $nodeValues ) );
+		$this->map( static::$nodeClass, $node->_id );
 		$this->setPermissions( $node );
 		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $parent ? $parent->_title : 'root' ) );
 	}

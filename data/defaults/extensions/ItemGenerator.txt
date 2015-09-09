@@ -99,6 +99,9 @@ class _{class} extends \IPS\faker\Content\Item
 		$obj->processForm( $itemValues );
 		$obj->save();
 
+		/* Map the Item entry so we can delete it later */
+		$this->map( $itemClass, $obj->id );
+
 		/* Create and save the first comment in the item */
 		$comment = $this->commentExt()->generateSingle( $obj, $values, TRUE );
 

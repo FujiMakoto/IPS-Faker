@@ -85,6 +85,9 @@ class _{class} extends \IPS\faker\Content\Comment
 		$obj->ip_address = $this->generator->ipAddress();
 		$obj->save();
 
+		/* Map the Comment entry so we can delete it later */
+		$this->map( $commentClass, $obj->id );
+
 		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $item->mapped('title') ) );
 	}
 
