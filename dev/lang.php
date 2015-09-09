@@ -14,14 +14,15 @@ $lang = array(
 	'r__faker_purge'                    => 'Purge Fake Content',
 
 	/* Extensions */
-	'ext__NodeGenerator'    => 'Generate fake container Nodes (e.g. forums).',
-	'ext__ItemGenerator'    => 'Generate fake Content Item submissions (e.g. forum topics).',
-	'ext__CommentGenerator' => 'Generate fake Content Comment submissions (e.g. forum topic posts).',
+	'ext__NodeGenerator'            => 'Generate fake container Nodes (e.g. forums)',
+	'ext__ItemGenerator'            => 'Generate fake Content Item submissions (e.g. forum topics)',
+	'ext__CommentGenerator'         => 'Generate fake Content Comment submissions (e.g. forum topic posts)',
+	'ext__ActiveRecordGenerator'    => 'Generate fake ActiveRecord submissions (e.g. members)',
 
 	/********************************
 	 * Forum Generators             *
 	 ********************************/
-	'menu__faker_forums'    => 'Forum Generator',
+	'menu__faker_forums'    => 'Forum Generators',
 
 	# [Node] Forums
 	'menu__faker_forums_Forum'  => 'Forums',
@@ -65,21 +66,20 @@ $lang = array(
 	'forums_faker_comments_hide_comment'    => 'Hide posts',
 
 	/********************************
-	 * Member Generators            *
+	 * Core Generators              *
 	 ********************************/
-	'menu__faker_membergen'         => 'Member Generator',
-	'menu__faker_membergen_member'  => 'Member Accounts',
+	'menu__faker_core'  => 'System Generators',
 
-	'faker_title_membersGen'    => 'Generate Member Accounts',
+	# [ActiveRecord] Members
+	'menu__faker_core_Members'  => 'Member Accounts',
 
-	'faker_form_member_count'   => 'Member creation count',
-	'faker_form_profile_photo'  => 'Generate profile photos',
-	'faker_form_member_group'   => 'Member group',
-	'faker_form_password'       => 'Use username as password',
+	'core_members_faker_activerecords_title'                => 'Generate Member Accounts',
+	'core_members_faker_activerecords_generator_message'    => 'Generating member account %s',
 
-	'faker_form_generate'   => 'Generate',
-	'random_fake'           => 'Random fake member',
-	'specific_member'       => 'Specific member',
+	'core_members_faker_activerecords_record_range'     => 'Member creation count',
+	'core_members_faker_activerecords_member_group'     => 'Member group',
+	'core_members_faker_activerecords_profile_photo'    => 'Profile photo',
+	'core_members_faker_activerecords_password'         => 'Use username as password',
 
 	/* Tools */
 	'menu__faker_tools'         => 'Tools',
@@ -96,6 +96,7 @@ $lang = array(
 	'faker_custom_author'       => 'Manually specify a member',
 	'faker_generate_success'    => 'Content successfully generated',
 	'faker_purge_success'       => 'Fake content successfully deleted',
+	'faker_form_generate'       => 'Generate',
 
 
 	'faker_form_purge'  => 'Delete Content'

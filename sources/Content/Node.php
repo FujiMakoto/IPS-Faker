@@ -58,6 +58,11 @@ abstract class _Node implements Extensible
 		$this->generator = new \IPS\faker\Content\Generator();
 	}
 
+	/**
+	 * Assign default permissions to the node
+	 *
+	 * @param   \IPS\Node\Model $node
+	 */
 	public function setPermissions( \IPS\Node\Model $node )
 	{
 		$nodeClass = static::$nodeClass;
