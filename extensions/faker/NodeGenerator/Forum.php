@@ -32,7 +32,7 @@ class _Forum extends \IPS\faker\Content\Node
 	/**
 	 * @brief   AdminCP tab restriction
 	 */
-	public static $acpRestriction = 'faker_generate';
+	public static $acpRestriction = 'forums_faker_generate_forums';
 
 	/**
 	 * @brief	Node Class

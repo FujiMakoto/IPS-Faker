@@ -32,7 +32,7 @@ class _Members extends \IPS\faker\Content\ActiveRecord
 	/**
 	 * @brief   AdminCP tab restriction
 	 */
-	public static $acpRestriction = 'faker_generate';
+	public static $acpRestriction = 'core_faker_generate_members';
 
 	/**
 	 * @brief	Active Record class

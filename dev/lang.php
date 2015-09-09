@@ -7,11 +7,7 @@ $lang = array(
 	'faker_generator_title' => "Generating %s",
 
 	/* AdminCP Permissions */
-	'r__faker_forum_generator'          => 'Forum Generator',
-	'r__faker_generate_forum_topics'    => 'Generate forum topics',
-	'r__faker_member_generator'         => 'Member Generator',
-	'r__faker_generate_member_accounts' => 'Generate member accounts',
-	'r__faker_purge'                    => 'Purge Fake Content',
+	'r__faker_generate' => 'Generate Fake Content',
 
 	/* Extensions */
 	'ext__NodeGenerator'            => 'Generate fake container Nodes (e.g. forums)',
@@ -23,6 +19,10 @@ $lang = array(
 	 * Forum Generators             *
 	 ********************************/
 	'menu__faker_forums'    => 'Forum Generators',
+
+	'r__forums_faker_generate_forums'   => 'Generate Forums',
+	'r__forums_faker_generate_topics'   => 'Generate Forum Topics',
+	'r__forums_faker_generate_posts'    => 'Generate Topic Posts',
 
 	# [Node] Forums
 	'menu__faker_forums_Forum'  => 'Forums',
@@ -69,6 +69,8 @@ $lang = array(
 	 * Core Generators              *
 	 ********************************/
 	'menu__faker_core'  => 'System Generators',
+
+	'r__core_faker_generate_members'   => 'Generate Member Accounts',
 
 	# [ActiveRecord] Members
 	'menu__faker_core_Members'  => 'Member Accounts',

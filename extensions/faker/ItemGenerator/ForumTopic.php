@@ -32,7 +32,7 @@ class _ForumTopic extends \IPS\faker\Content\Item
 	/**
 	 * @brief   AdminCP tab restriction
 	 */
-	public static $acpRestriction = 'faker_generate';
+	public static $acpRestriction = 'forums_faker_generate_topics';
 
 	/**
 	 * @brief   Comment generator extension

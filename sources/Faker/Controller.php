@@ -21,12 +21,22 @@ class _Controller extends \IPS\Dispatcher\Controller
 	public static $controller = 'item';
 
 	/**
+	 * @brief   Extension data container
+	 */
+	protected $extData = array();
+
+	/**
 	 * Execute
 	 *
 	 * @return	void
 	 */
 	public function execute()
 	{
+		/* Make sure we have permission to be here */
+		list( $ext ) = $this->extData();
+		$acpPermission = property_exists( $ext, 'acpRestriction' ) ? $ext::$acpRestriction : 'faker_generate';
+		\IPS\Dispatcher::i()->checkAcpPermission( $acpPermission );
+
 		parent::execute();
 	}
 
@@ -37,6 +47,10 @@ class _Controller extends \IPS\Dispatcher\Controller
 	 */
 	protected function extData()
 	{
+		/* Return pre-generated extension data if we have it */
+		if ( $this->extData )
+			return $this->extData;
+
 		/* Make sure our extension app and extension name have been defined */
 		if ( !($extApp = \IPS\Request::i()->extApp) or !($extension = \IPS\Request::i()->extension) )
 		{
@@ -54,9 +68,10 @@ class _Controller extends \IPS\Dispatcher\Controller
 		catch ( \Whoops\Exception\ErrorException $e )
 		{
 			\IPS\Output::i()->error( 'node_error', 'FAKER_EXTENSION_NOT_FOUND', 404 );
+			return array();
 		}
 
-		return array( $ext, $extApp, $extension, static::$controller );
+		return $this->extData = array( $ext, $extApp, $extension, static::$controller );
 	}
 
 	/**
