@@ -47,7 +47,6 @@ class _Application extends \IPS\Application
 
 			/* Make sure the application is enabled */
 			if ( !\IPS\Application::appIsEnabled( $app ) ) {
-				die(var_dump($app));
 				continue;
 			}
 
