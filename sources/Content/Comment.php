@@ -12,22 +12,12 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 /**
  * Content item abstract class
  */
-abstract class _Comment implements Extensible
+abstract class _Comment extends \IPS\faker\Content
 {
 	/**
 	 * @brief   Controller name for menu generation, this should not be modified
 	 */
 	public static $_controller = 'comments';
-
-	/**
-	 * @brief   Application name
-	 */
-	public static $app;
-
-	/**
-	 * @brief   AdminCP tab restriction
-	 */
-	public static $acpRestriction;
 
 	/**
 	 * @brief	[Content\Comment]	Item Class
@@ -38,30 +28,6 @@ abstract class _Comment implements Extensible
 	 * @brief	[Content\Item]	Comment Class
 	 */
 	public static $commentClass;
-
-	/**
-	 * @brief   Generator form title language string
-	 */
-	public static $title;
-
-	/**
-	 * @brief   Generator progress message language string
-	 */
-	public static $message;
-
-	/**
-	 * @brief   Faker decorator container
-	 * @var     \IPS\faker\Content\Generator
-	 */
-	public $generator = NULL;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->generator = new \IPS\faker\Content\Generator();
-	}
 
 	/**
 	 * Generate a fake content comment
@@ -77,11 +43,10 @@ abstract class _Comment implements Extensible
 	/**
 	 * Bulk process generations
 	 *
-	 * @param   array       $extData            Extension data ( $ext, $extApp, $extension, $controller )
-	 * @param   array|null  $values             Form submission values
+	 * @param   array|null  $values Form submission values
 	 * @return  \IPS\Helpers\MultipleRedirect
 	 */
-	public function generateBulk( array $extData, $values=NULL )
+	public function generateBulk( $values=NULL )
 	{
 		$self = $this;
 		$vCookie = static::$app . '_faker_' . static::$_controller . '_generator_values';

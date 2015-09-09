@@ -12,7 +12,7 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 /**
  * Content item abstract class
  */
-abstract class _ActiveRecord implements Extensible
+abstract class _ActiveRecord extends \IPS\faker\Content
 {
 	/**
 	 * @brief   Controller name for menu generation, this should not be modified
@@ -20,43 +20,9 @@ abstract class _ActiveRecord implements Extensible
 	public static $_controller = 'activerecords';
 
 	/**
-	 * @brief   Application name
-	 */
-	public static $app;
-
-	/**
-	 * @brief   AdminCP tab restriction
-	 */
-	public static $acpRestriction;
-
-	/**
 	 * @brief	Active Record class
 	 */
 	public static $activeRecordClass;
-
-	/**
-	 * @brief   Generator form title language string
-	 */
-	public static $title;
-
-	/**
-	 * @brief   Generator progress message language string
-	 */
-	public static $message;
-
-	/**
-	 * @brief   Faker decorator container
-	 * @var     \IPS\faker\Content\Generator
-	 */
-	public $generator = NULL;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->generator = new \IPS\faker\Content\Generator();
-	}
 
 	/**
 	 * Generate fake content
@@ -69,11 +35,10 @@ abstract class _ActiveRecord implements Extensible
 	/**
 	 * Bulk process generations
 	 *
-	 * @param   array       $extData            Extension data ( $ext, $extApp, $extension, $controller )
-	 * @param   array|null  $values             Form submission values
+	 * @param   array|null  $values Form submission values
 	 * @return  \IPS\Helpers\MultipleRedirect
 	 */
-	public function generateBulk( array $extData, $values=NULL )
+	public function generateBulk( $values=NULL )
 	{
 		$self = $this;
 		$vCookie = static::$app . '_faker_' . static::$_controller . '_generator_values';

@@ -12,7 +12,7 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 /**
  * Content item abstract class
  */
-abstract class _Node implements Extensible
+abstract class _Node extends \IPS\faker\Content
 {
 	/**
 	 * @brief   Controller name for menu generation, this should not be modified
@@ -20,43 +20,9 @@ abstract class _Node implements Extensible
 	public static $_controller = 'nodes';
 
 	/**
-	 * @brief   Application name
-	 */
-	public static $app;
-
-	/**
-	 * @brief   AdminCP tab restriction
-	 */
-	public static $acpRestriction;
-
-	/**
 	 * @brief	Node Class
 	 */
 	public static $nodeClass;
-
-	/**
-	 * @brief   Generator form title language string
-	 */
-	public static $title;
-
-	/**
-	 * @brief   Generator progress message language string
-	 */
-	public static $message;
-
-	/**
-	 * @brief   Faker decorator container
-	 * @var     \IPS\faker\Content\Generator
-	 */
-	public $generator = NULL;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->generator = new \IPS\faker\Content\Generator();
-	}
 
 	/**
 	 * Assign default permissions to the node
@@ -152,7 +118,7 @@ abstract class _Node implements Extensible
 	 * @param   array|null  $values             Form submission values
 	 * @return  \IPS\Helpers\MultipleRedirect
 	 */
-	public function generateBulk( array $extData, $values=NULL )
+	public function generateBulk( $values=NULL )
 	{
 		$self = $this;
 		$vCookie = static::$app . '_faker_' . static::$_controller . '_generator_values';

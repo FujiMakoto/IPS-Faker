@@ -12,22 +12,12 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 /**
  * Content item abstract class
  */
-abstract class _Item implements Extensible
+abstract class _Item extends \IPS\faker\Content
 {
 	/**
 	 * @brief   Controller name for menu generation, this should not be modified
 	 */
 	public static $_controller = 'items';
-
-	/**
-	 * @brief   Application name
-	 */
-	public static $app;
-
-	/**
-	 * @brief   AdminCP tab restriction
-	 */
-	public static $acpRestriction;
 
 	/**
 	 * @brief   Comment generator extension
@@ -45,33 +35,9 @@ abstract class _Item implements Extensible
 	public static $itemClass;
 
 	/**
-	 * @brief   Generator form title language string
-	 */
-	public static $title;
-
-	/**
-	 * @brief   Generator progress message language string
-	 */
-	public static $message;
-
-	/**
 	 * @brief   Comment extension container
 	 */
 	protected $_commentExtension = NULL;
-
-	/**
-	 * @brief   Faker decorator container
-	 * @var     \IPS\faker\Content\Generator
-	 */
-	public $generator = NULL;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->generator = new \IPS\faker\Content\Generator();
-	}
 
 	/**
 	 * Load the Comments extension for this Item
@@ -116,15 +82,14 @@ abstract class _Item implements Extensible
 	/**
 	 * Bulk process generations
 	 *
-	 * @param   array       $extData            Extension data ( $ext, $extApp, $extension, $controller )
-	 * @param   array|null  $values             Form submission values
+	 * @param   array|null  $values Form submission values
 	 * @return  \IPS\Helpers\MultipleRedirect
 	 */
-	public function generateBulk( array $extData, $values=NULL )
+	public function generateBulk( $values=NULL )
 	{
-		list( $ext, $extApp, $extension, $controller ) = $extData;
-		$vCookie = $extApp . '_faker_' . $controller . '_generator_values';
-		$mCookie = $extApp . '_faker_' . $controller . '_generator_map';
+		$self = $this;
+		$vCookie = static::$app . '_faker_' . static::$_controller . '_generator_values';
+		$mCookie = static::$app . '_faker_' . static::$_controller . '_generator_map';
 
 		/* If this is a form submission, store our values now */
 		if ( $values )
@@ -157,10 +122,12 @@ abstract class _Item implements Extensible
 		$total = $nodeMap['total'];
 
 		/* Generate the MultipleRedirect page */
+		$reflect = new \ReflectionClass( $this );
+		$extension = $reflect->getShortName();
 		$processUrl = \IPS\Http\Url::internal(
-			"app=faker&module=generator&controller={$controller}&extApp={$extApp}&extension={$extension}&do=process"
+			"app=faker&module=generator&controller={$self::$_controller}&extApp={$self::$app}&extension={$extension}&do=process"
 		);
-		return new \IPS\Helpers\MultipleRedirect( $processUrl, function( $doneSoFar ) use( $perGo, $ext, $values, $total, $nodeMap, $vCookie, $mCookie )
+		return new \IPS\Helpers\MultipleRedirect( $processUrl, function( $doneSoFar ) use( $self, $perGo, $values, $total, $nodeMap, $vCookie, $mCookie )
 		{
 			/* Have we processed everything? */
 			if ( !array_sum( $nodeMap['nodes'] ) ) {
@@ -177,8 +144,8 @@ abstract class _Item implements Extensible
 				}
 
 				/* Load our node container */
-				$containerNodeClass = $ext::$containerNodeClass;
-				$_node = $containerNodeClass::load( $node );
+				$nodeClass = $self::$nodeClass;
+				$_node = $nodeClass::load( $node );
 
 				/* Process up to $perGo items from this node */
 				$count = 0;
@@ -187,7 +154,7 @@ abstract class _Item implements Extensible
 				{
 					++$count;
 					--$limit;
-					$generated[] = $ext->generateSingle( $_node, $values );
+					$generated[] = $self->generateSingle( $_node, $values );
 				}
 
 				/* If we've cleared out this node, remove it from our map and proceed to the next one */
@@ -203,10 +170,10 @@ abstract class _Item implements Extensible
 			\IPS\Request::i()->setCookie( $mCookie, json_encode($nodeMap) );
 			return array( $doneSoFar, end($generated), ( 100 * $doneSoFar ) / $total );
 
-		}, function() use( $values, $controller, $extApp, $extension )
+		}, function() use( $self, $extension )
 		{
 			\IPS\Output::i()->redirect( \IPS\Http\Url::internal(
-				"app=faker&module=generator&controller={$controller}&extApp={$extApp}&extension={$extension}"
+				"app=faker&module=generator&controller={$self::$_controller}&extApp={$self::$app}&extension={$extension}"
 			), 'completed' );
 		} );
 	}
