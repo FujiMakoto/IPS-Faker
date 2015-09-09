@@ -4,7 +4,7 @@
  * @author		<a href='https://www.Makoto.io'>Makoto Fujimoto</a>
  * @copyright	(c) 2015 www.Makoto.io
  * @license		<a href='http://opensource.org/licenses/MIT'>MIT License</a>
- * @package		Faker
+ * @package		Fake Content Generator
 {subpackage}
  * @since		{date}
  * @version		0.2.0
@@ -97,7 +97,6 @@ class _{class} extends \IPS\faker\Content\Item
 		/* Create and save the item */
 		$obj = $itemClass::createItem( $member, $ipAddress = $this->generator->ipAddress(), new \IPS\DateTime, $node );
 		$obj->processForm( $itemValues );
-		$obj->faker_fake = 1;
 		$obj->save();
 
 		/* Create and save the first comment in the item */

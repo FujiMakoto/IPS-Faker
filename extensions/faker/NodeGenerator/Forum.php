@@ -4,7 +4,7 @@
  * @author		<a href='https://www.Makoto.io'>Makoto Fujimoto</a>
  * @copyright	(c) 2015 www.Makoto.io
  * @license		<a href='http://opensource.org/licenses/MIT'>MIT License</a>
- * @package		Faker
+ * @package		Fake Content Generator
  * @subpackage	Fake Content Generator
  * @since		08 Sep 2015
  * @version		0.2.0

@@ -4,7 +4,7 @@
  * @author		<a href='https://www.Makoto.io'>Makoto Fujimoto</a>
  * @copyright	(c) 2015 www.Makoto.io
  * @license		<a href='http://opensource.org/licenses/MIT'>MIT License</a>
- * @package		Faker
+ * @package		Fake Content Generator
  * @subpackage	Fake Content Generator
  * @since		09 Sep 2015
  * @version		0.2.0
@@ -50,7 +50,7 @@ class _Members extends \IPS\faker\Content\ActiveRecord
 	public static $message = 'core_members_faker_activerecords_generator_message';
 
 	/**
-	 * Generate a fake ActiveRecord item
+	 * Generate a fake member account
 	 *
 	 * @param   array   $values Generator form values
 	 * @return  string  Progress message

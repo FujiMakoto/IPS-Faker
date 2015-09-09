@@ -6,7 +6,7 @@
  * @package		IPS Social Suite
  * @subpackage	Faker
  * @since		20 Aug 2015
- * @version		
+ * @version		0.2.0
  */
  
 namespace IPS\faker;

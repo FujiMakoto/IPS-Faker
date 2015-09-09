@@ -50,7 +50,7 @@ class _{class} extends \IPS\faker\Content\ActiveRecord
 	public static $message = '{app}_faker_activerecords_generator_message';
 
 	/**
-	 * Generate a fake ActiveRecord item
+	 * Generate a fake ActiveRecord entry
 	 *
 	 * @param   array   $values Generator form values
 	 * @return  string  Progress message
@@ -88,7 +88,7 @@ class _{class} extends \IPS\faker\Content\ActiveRecord
 	}
 
 	/**
-	 * Build a generator form for this comment
+	 * Build a generator form for this record
 	 *
 	 * @param   \IPS\faker\Decorators\Form  $form
 	 * @return  void

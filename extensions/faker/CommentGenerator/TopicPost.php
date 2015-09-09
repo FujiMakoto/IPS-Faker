@@ -4,7 +4,7 @@
  * @author		<a href='https://www.Makoto.io'>Makoto Fujimoto</a>
  * @copyright	(c) 2015 www.Makoto.io
  * @license		<a href='http://opensource.org/licenses/MIT'>MIT License</a>
- * @package		Faker
+ * @package		Fake Content Generator
  * @subpackage	Fake Content Generator
  * @since		07 Sep 2015
  * @version		0.2.0
@@ -55,11 +55,11 @@ class _TopicPost extends \IPS\faker\Content\Comment
 	public static $message = 'forums_faker_comments_generator_message';
 
 	/**
-	 * Generate a fake item comment
+	 * Generate a fake topic post
 	 *
-	 * @param   \IPS\Content\Item   $topic  The content item
+	 * @param   \IPS\Content\Item   $topic  The topic
 	 * @param   array               $values Generator form values
-	 * @param   bool                $first  Indicates this is the first comment for an item
+	 * @param   bool                $first  Indicates this is the first post in a topic
 	 * @return  string  Progress message
 	 */
 	public function generateSingle( \IPS\Content\Item $topic, array $values, $first=FALSE )
@@ -92,7 +92,7 @@ class _TopicPost extends \IPS\faker\Content\Comment
 	}
 
 	/**
-	 * Build a generator form for this comment
+	 * Build a generator form for this post
 	 *
 	 * @param   \IPS\faker\Decorators\Form  $form
 	 * @return  void

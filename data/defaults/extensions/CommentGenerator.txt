@@ -4,7 +4,7 @@
  * @author		<a href='https://www.Makoto.io'>Makoto Fujimoto</a>
  * @copyright	(c) 2015 www.Makoto.io
  * @license		<a href='http://opensource.org/licenses/MIT'>MIT License</a>
- * @package		Faker
+ * @package		Fake Content Generator
 {subpackage}
  * @since		{date}
  * @version		0.2.0
@@ -80,13 +80,10 @@ class _{class} extends \IPS\faker\Content\Comment
 			$member = $this->generator->guest();
 		}
 
-		/* Create and save the post */
+		/* Create and save the comment */
 		$obj = $commentClass::create( $item, $this->generator->comment(), $first, ( !$member->name ) ? NULL : $member->name, $item->hidden() ? FALSE : NULL, $member );
 		$obj->ip_address = $this->generator->ipAddress();
 		$obj->save();
-
-		$itemClass = static::$itemClass;
-		call_user_func_array( array( 'IPS\File', 'claimAttachments' ), array_merge( array( 'newContentItem-' . $item::$application . '/' . $itemClass::$module  . '-' . 0 ), $obj->attachmentIds() ) );
 
 		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $item->mapped('title') ) );
 	}

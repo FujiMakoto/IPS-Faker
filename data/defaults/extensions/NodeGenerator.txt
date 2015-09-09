@@ -4,7 +4,7 @@
  * @author		<a href='https://www.Makoto.io'>Makoto Fujimoto</a>
  * @copyright	(c) 2015 www.Makoto.io
  * @license		<a href='http://opensource.org/licenses/MIT'>MIT License</a>
- * @package		Faker
+ * @package		Fake Content Generator
 {subpackage}
  * @since		{date}
  * @version		0.2.0
@@ -99,17 +99,10 @@ class _{class} extends \IPS\faker\Content\Node
 			'class'		      	=> '\IPS\{app}\Node',
 			'disabled'	      	=> array(),
 			'zeroVal'         	=> 'node_no_parentf',
-			// 'zeroValTogglesOff'	=> array( 'form_new_{app}_type', '{node}_icon' ),
 			'permissionCheck' => function( $node )
 			{
 				return !isset( \IPS\Request::i()->id ) or ( $node->id != \IPS\Request::i()->id and !$node->isChildOf( $node::load( \IPS\Request::i()->id ) ) );
 			}
-		), function( $val )
-		{
-			if ( !$val and \IPS\Request::i()->{app}_type !== 'category' )
-			{
-				throw new \DomainException('{app}_parent_id_error');
-			}
-		} ) );
+		) ) );
 	}
 }
