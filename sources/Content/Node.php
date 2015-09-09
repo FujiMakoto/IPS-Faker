@@ -218,29 +218,22 @@ abstract class _Node implements Extensible
 			}
 
 			/* Process our nodes */
-			$nodesGenerated = array();
+			$generated = array();
 			foreach( $parentMap['parents'] as $node => &$limit )
 			{
 				/* Have we reached our per go limit? */
-				if ( count($nodesGenerated) >= $perGo ) {
+				if ( count($generated) >= $perGo ) {
 					break;
 				}
-
-				/* Load our node container and set our dynamic message here */
-				$nodeClass = $self::$nodeClass;
-				$_node = $node ? $nodeClass::load( $node ) : NULL;
-				$message = \IPS\Member::loggedIn()->language()->addToStack( $self::$message, true, array(
-					'sprintf' => $_node ? $_node->_title : 'root'
-				) );
 
 				/* Process up to $perGo items from this node */
 				$count = 0;
 				$_limit = $limit;
-				while ( ($count < $_limit) and (count($nodesGenerated) < $perGo) )
+				while ( ($count < $_limit) and (count($generated) < $perGo) )
 				{
 					++$count;
 					--$limit;
-					$nodesGenerated[] = $self->generateSingle( $node, $values );
+					$generated[] = $self->generateSingle( $node, $values );
 				}
 
 				/* If we've cleared out this node, remove it from our map and proceed to the next one */
@@ -254,7 +247,7 @@ abstract class _Node implements Extensible
 			/* Update our session cookies and proceed to the next chunk */
 			\IPS\Request::i()->setCookie( $vCookie, json_encode($values) );
 			\IPS\Request::i()->setCookie( $mCookie, json_encode($parentMap) );
-			return array( $doneSoFar, $message, ( 100 * $doneSoFar ) / $total );
+			return array( $doneSoFar, end($generated), ( 100 * $doneSoFar ) / $total );
 
 		}, function() use( $self, $extension )
 		{

@@ -64,7 +64,7 @@ class _{class} extends \IPS\faker\Content\Item
 	 *
 	 * @param	\IPS\Node\Model	$node	The item container
 	 * @param   array           $values Generator form values
-	 * @return  \IPS\Content\Item
+	 * @return  string  Progress message
 	 */
 	public function generateSingle( \IPS\Node\Model $node = null, array $values )
 	{
@@ -124,7 +124,7 @@ class _{class} extends \IPS\faker\Content\Item
 			$obj->save();
 		}
 
-		return $obj;
+		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $node->_title ) );
 	}
 
 	/**

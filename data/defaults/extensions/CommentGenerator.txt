@@ -60,7 +60,7 @@ class _{class} extends \IPS\faker\Content\Comment
 	 * @param	\IPS\Content\Item   $item   The content item
 	 * @param   array               $values Generator form values
 	 * @param   bool                $first  Indicates this is the first comment for an item
-	 * @return  \IPS\Content\Comment
+	 * @return  string  Progress message
 	 */
 	public function generateSingle( \IPS\Content\Item $item, array $values, $first=FALSE )
 	{
@@ -88,7 +88,7 @@ class _{class} extends \IPS\faker\Content\Comment
 		$itemClass = static::$itemClass;
 		call_user_func_array( array( 'IPS\File', 'claimAttachments' ), array_merge( array( 'newContentItem-' . $item::$application . '/' . $itemClass::$module  . '-' . 0 ), $obj->attachmentIds() ) );
 
-		return $obj;
+		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $item->mapped('title') ) );
 	}
 
 	/**

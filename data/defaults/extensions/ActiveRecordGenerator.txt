@@ -53,7 +53,7 @@ class _{class} extends \IPS\faker\Content\ActiveRecord
 	 * Generate a fake ActiveRecord item
 	 *
 	 * @param   array   $values Generator form values
-	 * @return  \IPS\Patterns\ActiveRecord
+	 * @return  string  Progress message
 	 */
 	public function generateSingle( array $values )
 	{
@@ -84,7 +84,7 @@ class _{class} extends \IPS\faker\Content\ActiveRecord
 		$obj->processForm( $recordValues );
 		$obj->save();
 
-		return $obj;
+		return \IPS\Member::loggedIn()->language()->addToStack( static::$message );
 	}
 
 	/**

@@ -54,7 +54,7 @@ class _{class} extends \IPS\faker\Content\Node
 	 *
 	 * @param   \IPS\Node\Model|null    $parent Parent node, or NULL to generate a root node
 	 * @param   array                   $values Generator form values
-	 * @return  \IPS\Node\Model
+	 * @return  string  Progress message
 	 */
 	public function generateSingle( $parent=NULL, array $values )
 	{
@@ -82,7 +82,7 @@ class _{class} extends \IPS\faker\Content\Node
 		$itemClass = static::$itemClass;
 		call_user_func_array( array( 'IPS\File', 'claimAttachments' ), array_merge( array( 'newContentItem-' . $item::$application . '/' . $itemClass::$module  . '-' . 0 ), $obj->attachmentIds() ) );
 
-		return $obj;
+		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $parent ? $parent->_title : 'root' ) );
 	}
 
 	/**

@@ -123,25 +123,22 @@ abstract class _Comment implements Extensible
 				return NULL;
 			}
 
-			/* Load our content item container and set our dynamic message here */
+			/* Load our content item container */
 			$itemClass = $self::$itemClass;
 			$_item = $itemClass::loadFromUrl( $values['item_url'] );
-			$message = \IPS\Member::loggedIn()->language()->addToStack( $self::$message, true, array(
-				'sprintf' => $_item->mapped('title')
-			) );
 
 			$count = 0;
-			$itemsGenerated = array();
-			while ( ($count < $values['total']) and (count($itemsGenerated) < $perGo) )
+			$generated = array();
+			while ( ($count < $values['total']) and (count($generated) < $perGo) )
 			{
 				++$count;
-				$itemsGenerated[] = $self->generateSingle( $_item, $values );
+				$generated[] = $self->generateSingle( $_item, $values );
 			}
 			$doneSoFar += $perGo;
 
 			/* Update our session cookies and proceed to the next chunk */
 			\IPS\Request::i()->setCookie( $vCookie, json_encode($values) );
-			return array( $doneSoFar, $message, ( 100 * $doneSoFar ) / $values['total'] );
+			return array( $doneSoFar, end($generated), ( 100 * $doneSoFar ) / $values['total'] );
 
 		}, function() use( $self, $values, $extension )
 		{

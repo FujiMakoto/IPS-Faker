@@ -124,7 +124,7 @@ class _ForumTopic extends \IPS\faker\Content\Item
 			$obj->save();
 		}
 
-		return $obj;
+		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $forum->_title ) );
 	}
 
 	/**
