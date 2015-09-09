@@ -11,9 +11,8 @@ if ( !defined( '\IPS\SUITE_UNIQUE_KEY' ) )
 
 /**
  * Faker utilities
- * @package IPS\faker
  */
-class _Faker
+class _Faker extends \IPS\Patterns\ActiveRecord
 {
 	/**
 	 * Generators
@@ -22,6 +21,61 @@ class _Faker
 	const ITEMS             = 'ItemGenerator';
 	const COMMENTS          = 'CommentGenerator';
 	const ACTIVERECORDS     = 'ActiveRecordGenerator';
+
+	/**
+	 * @brief	Database Table
+	 */
+	public static $databaseTable = 'faker_content_map';
+
+	/**
+	 * @brief	Multiton Store
+	 */
+	protected static $multitons;
+
+	/**
+	 * @brief	Default Values
+	 */
+	protected static $defaultValues = array();
+
+	/**
+	 * @brief	Database Column Map
+	 */
+	public static $databaseColumnMap = array();
+
+	/**
+	 * Get a map of fake content items
+	 *
+	 * @param   null    $class  Content item class, or NULL to return all
+	 * @param   int     $limit  Query limit
+	 * @param   int     $offset Query offset
+	 * @return  \IPS\Db\Select
+	 */
+	public static function allFake( $class=NULL, $limit=0, $offset=0 )
+	{
+		$where = $class ? array( 'class=?', $class ) : NULL;
+		$limit = array( (int) $offset, (int) $limit );
+
+		return \IPS\Db::i()->select( '*', static::$databaseTable, $where, NULL, $limit );
+	}
+
+	/**
+	 * Create a map to a fake content item
+	 *
+	 * @param   string              $class      Content class
+	 * @param   int                 $contentId  Content ID
+	 * @param   \IPS\Member|null    $author     Member that generated the item, or NULL for the logged in member
+	 * @return  int Insert ID
+	 */
+	public static function createMap( $class, $contentId, $author=NULL )
+	{
+		$author = $author ?: \IPS\Member::loggedIn();
+		return \IPS\Db::i()->insert( static::$databaseTable, array(
+			'class'         => $class,
+			'content_id'    => $contentId,
+			'author'        => $author->member_id,
+			'created_at'    => time()
+		) );
+	}
 
 	/**
 	 * Retrieve generator extensions
