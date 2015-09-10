@@ -84,7 +84,7 @@ class _TopicPost extends \IPS\faker\Content\Comment
 		$obj = $commentClass::create( $topic, $this->generator->comment(), $first, ( !$member->name ) ? NULL : $member->name, $topic->hidden() ? FALSE : NULL, $member );
 		$obj->ip_address = $this->generator->ipAddress();
 		$obj->save();
-		$this->map( $commentClass, $obj->id );
+		$this->map( $commentClass, $obj->pid );
 
 		$itemClass = static::$itemClass;
 		call_user_func_array( array( 'IPS\File', 'claimAttachments' ), array_merge( array( 'newContentItem-' . $topic::$application . '/' . $itemClass::$module  . '-' . 0 ), $obj->attachmentIds() ) );

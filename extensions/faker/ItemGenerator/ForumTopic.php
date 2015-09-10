@@ -100,7 +100,7 @@ class _ForumTopic extends \IPS\faker\Content\Item
 		$obj->processForm( $topicValues );
 		$obj->faker_fake = 1;
 		$obj->save();
-		$this->map( static::$itemClass, $obj->id );
+		$this->map( static::$itemClass, $obj->tid );
 
 		/* Create and save the first post in the topic */
 		$comment = $this->commentExt()->generateSingle( $obj, $values, TRUE );
