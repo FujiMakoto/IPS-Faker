@@ -89,12 +89,11 @@ $lang = array(
 
 	'faker_title_purge'         => 'Purge Faked Content',
 
-	'faker_form_content_types'  => 'Content types',
-	'faker_form_topics'         => 'Topics',
-	'faker_form_members'        => 'Members',
+	'faker_purge_content_types' => 'Content types',
 	'faker_purge'               => 'Purge content',
 
 	/* Misc. */
+	'faker_random_fake'         => 'Random fake member',
 	'faker_custom_author'       => 'Manually specify a member',
 	'faker_generate_success'    => 'Content successfully generated',
 	'faker_purge_success'       => 'Fake content successfully deleted',
