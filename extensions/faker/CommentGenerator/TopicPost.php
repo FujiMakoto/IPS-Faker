@@ -116,6 +116,6 @@ class _TopicPost extends \IPS\faker\Content\Comment
 		$form->add( new \IPS\Helpers\Form\NumberRange('comment_range', array( 'start' => 3, 'end' => 5 ), TRUE, array(
 			'start' => array( 'min' => 1 ),
 		) ) );
-		$form->add( new \IPS\Helpers\Form\YesNo( 'hide_comment', 0 ) );
+		// $form->add( new \IPS\Helpers\Form\YesNo( 'hide_comment', 0 ) ); @TODO
 	}
 }

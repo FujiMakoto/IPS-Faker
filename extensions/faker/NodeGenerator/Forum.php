@@ -129,8 +129,8 @@ class _Forum extends \IPS\faker\Content\Node
 			'options' => array(
 				'normal' 	=> 'forum_type_normal',
 				'qa' 		=> 'forum_type_qa',
-				'category'	=> 'forum_type_category',
-				'redirect'	=> 'forum_type_redirect'
+				// 'category'	=> 'forum_type_category', @TODO
+				// 'redirect'	=> 'forum_type_redirect' @TODO
 			),
 			'toggles'	=> array(
 				'normal'	=> array( // make sure when adding here that you also add to qa below
@@ -192,7 +192,7 @@ class _Forum extends \IPS\faker\Content\Node
 			}
 		} ) );
 
-		$form->add( new \IPS\Helpers\Form\YesNo( 'icon', FALSE ) );
+		// $form->add( new \IPS\Helpers\Form\YesNo( 'icon', FALSE ) ); @TODO
 		$form->add( new \IPS\Helpers\Form\YesNo( 'password_on', FALSE, FALSE, array( 'togglesOn' => array( 'password', 'password_override' ) ), NULL, NULL, NULL, 'password_on' ) );
 		$form->add( new \IPS\Helpers\Form\Password( 'password', NULL, FALSE, array(), NULL, NULL, NULL, 'password' ) );
 
