@@ -33,7 +33,7 @@ class _Generator
 	 */
 	public function title( $maxChars = 50 )
 	{
-		return $this->faker->text( $maxChars );
+		return trim( $this->faker->text($maxChars), '.' );
 	}
 
 	/**
