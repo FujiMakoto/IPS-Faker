@@ -65,7 +65,7 @@ class _{class} extends \IPS\faker\Content\Comment
 	 * @param	\IPS\Content\Item   $item   The content item
 	 * @param   array               $values Generator form values
 	 * @param   bool                $first  Indicates this is the first comment for an item
-	 * @return  string  Progress message
+	 * @return  string|\IPS\Content\Comment Progress message or comment object if first comment
 	 */
 	public function generateSingle( \IPS\Content\Item $item, array $values, $first=FALSE )
 	{
@@ -90,10 +90,12 @@ class _{class} extends \IPS\faker\Content\Comment
 		$obj->ip_address = $this->generator->ipAddress();
 		$obj->save();
 
-		/* Map the Comment entry so we can delete it later */
-		$this->map( $commentClass, $obj->id );
+		/* Map the Comment entry so we can delete it later (unless this is the first comment entry for an Item) */
+		if ( !$first ) { $this->map( $commentClass, $obj->pid ); }
 
-		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $item->mapped('title') ) );
+		return $first
+			? $obj
+			: \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $item->mapped('title') ) );
 	}
 
 	/**

@@ -65,7 +65,7 @@ class _TopicPost extends \IPS\faker\Content\Comment
 	 * @param   \IPS\Content\Item   $topic  The topic
 	 * @param   array               $values Generator form values
 	 * @param   bool                $first  Indicates this is the first post in a topic
-	 * @return  string  Progress message
+	 * @return  string|\IPS\Content\Comment Progress message or comment object if first comment
 	 */
 	public function generateSingle( \IPS\Content\Item $topic, array $values, $first=FALSE )
 	{
@@ -89,12 +89,14 @@ class _TopicPost extends \IPS\faker\Content\Comment
 		$obj = $commentClass::create( $topic, $this->generator->comment(), $first, ( !$member->name ) ? NULL : $member->name, $topic->hidden() ? FALSE : NULL, $member );
 		$obj->ip_address = $this->generator->ipAddress();
 		$obj->save();
-		$this->map( $commentClass, $obj->pid );
+		if ( !$first ) { $this->map( $commentClass, $obj->pid ); }  // Only map if this is NOT the first comment
 
 		$itemClass = static::$itemClass;
 		call_user_func_array( array( 'IPS\File', 'claimAttachments' ), array_merge( array( 'newContentItem-' . $topic::$application . '/' . $itemClass::$module  . '-' . 0 ), $obj->attachmentIds() ) );
 
-		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $topic->mapped('title') ) );
+		return $first
+			? $obj
+			: \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $topic->mapped('title') ) );
 	}
 
 	/**
