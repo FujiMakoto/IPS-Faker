@@ -22,5 +22,25 @@
             "do": "",
             "restriction": "purge_manage"
         }
+    },
+    "generator": {
+        "items": {
+            "tab": "faker",
+            "controller": "items",
+            "do": "",
+            "restriction": null
+        },
+        "comments": {
+            "tab": "faker",
+            "controller": "comments",
+            "do": "",
+            "restriction": null
+        },
+        "nodes": {
+            "tab": "faker",
+            "controller": "nodes",
+            "do": "",
+            "restriction": null
+        }
     }
 }

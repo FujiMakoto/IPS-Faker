@@ -1,1 +1,101 @@
-[]
+{
+    "faker_content_map": {
+        "name": "faker_content_map",
+        "columns": {
+            "id": {
+                "allow_null": false,
+                "auto_increment": true,
+                "binary": false,
+                "comment": "ID Number",
+                "decimals": null,
+                "default": null,
+                "length": 20,
+                "name": "id",
+                "type": "BIGINT",
+                "unsigned": true,
+                "values": [],
+                "zerofill": false
+            },
+            "class": {
+                "allow_null": false,
+                "auto_increment": false,
+                "binary": false,
+                "comment": "Content class",
+                "decimals": null,
+                "default": "",
+                "length": 255,
+                "name": "class",
+                "type": "VARCHAR",
+                "unsigned": false,
+                "values": [],
+                "zerofill": false
+            },
+            "content_id": {
+                "allow_null": false,
+                "auto_increment": false,
+                "binary": false,
+                "comment": "Content ID",
+                "decimals": null,
+                "default": "",
+                "length": 20,
+                "name": "content_id",
+                "type": "BIGINT",
+                "unsigned": true,
+                "values": [],
+                "zerofill": false
+            },
+            "created_at": {
+                "allow_null": true,
+                "auto_increment": false,
+                "binary": false,
+                "comment": "Content creation timestamp",
+                "decimals": null,
+                "default": null,
+                "length": 11,
+                "name": "created_at",
+                "type": "INT",
+                "unsigned": true,
+                "values": [],
+                "zerofill": false
+            },
+            "author": {
+                "allow_null": true,
+                "auto_increment": false,
+                "binary": false,
+                "comment": "Member ID of the fake content creator",
+                "decimals": null,
+                "default": null,
+                "length": 20,
+                "name": "author",
+                "type": "BIGINT",
+                "unsigned": true,
+                "values": [],
+                "zerofill": false
+            }
+        },
+        "indexes": {
+            "PRIMARY": {
+                "type": "primary",
+                "name": "PRIMARY",
+                "length": [
+                    null
+                ],
+                "columns": [
+                    "id"
+                ]
+            },
+            "class": {
+                "type": "key",
+                "name": "class",
+                "length": [
+                    191
+                ],
+                "columns": [
+                    "class"
+                ]
+            }
+        },
+        "collation": "utf8mb4_unicode_ci",
+        "engine": "InnoDB"
+    }
+}

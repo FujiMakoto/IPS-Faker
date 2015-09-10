@@ -1,0 +1,116 @@
+{
+    "1": {
+        "method": "createTable",
+        "params": [
+            {
+                "name": "faker_content_map",
+                "columns": {
+                    "id": {
+                        "name": "id",
+                        "type": "BIGINT",
+                        "length": "20",
+                        "unsigned": true,
+                        "zerofill": false,
+                        "binary": false,
+                        "allow_null": false,
+                        "default": null,
+                        "auto_increment": true,
+                        "comment": "ID Number"
+                    },
+                    "class": {
+                        "name": "class",
+                        "type": "VARCHAR",
+                        "length": 255,
+                        "decimals": null,
+                        "values": [],
+                        "allow_null": false,
+                        "default": null,
+                        "comment": "Content class",
+                        "unsigned": false,
+                        "zerofill": false,
+                        "auto_increment": false,
+                        "binary": false
+                    },
+                    "content_id": {
+                        "name": "content_id",
+                        "type": "BIGINT",
+                        "length": null,
+                        "decimals": null,
+                        "values": [],
+                        "allow_null": false,
+                        "default": null,
+                        "comment": "Content ID",
+                        "unsigned": true,
+                        "zerofill": false,
+                        "auto_increment": false,
+                        "binary": false
+                    },
+                    "author": {
+                        "name": "author",
+                        "type": "BIGINT",
+                        "length": null,
+                        "decimals": null,
+                        "values": [],
+                        "allow_null": true,
+                        "default": null,
+                        "comment": "Member ID of the fake content creator",
+                        "unsigned": true,
+                        "zerofill": false,
+                        "auto_increment": false,
+                        "binary": false
+                    },
+                    "created_at": {
+                        "name": "created_at",
+                        "type": "INT",
+                        "length": 11,
+                        "decimals": null,
+                        "values": [],
+                        "allow_null": true,
+                        "default": null,
+                        "comment": "Content creation timestamp",
+                        "unsigned": true,
+                        "zerofill": false,
+                        "auto_increment": false,
+                        "binary": false
+                    }
+                },
+                "indexes": {
+                    "PRIMARY": {
+                        "type": "primary",
+                        "name": "PRIMARY",
+                        "columns": [
+                            "id"
+                        ],
+                        "length": [
+                            null
+                        ]
+                    },
+                    "class": {
+                        "type": "key",
+                        "name": "class",
+                        "columns": [
+                            "class"
+                        ],
+                        "length": [
+                            250
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "2": {
+        "method": "dropColumn",
+        "params": [
+            "forums_topics",
+            "faker_fake"
+        ]
+    },
+    "3": {
+        "method": "dropColumn",
+        "params": [
+            "core_members",
+            "faker_fake"
+        ]
+    }
+}

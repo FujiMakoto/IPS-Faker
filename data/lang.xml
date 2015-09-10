@@ -1,44 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
- <app key="faker" version="00010000">
+ <app key="faker" version="20000">
   <word key="__app_faker" js="0">Fake Content Generator</word>
   <word key="menutab__faker" js="0">Faker</word>
   <word key="menutab__faker_icon" js="0">plus-square</word>
-  <word key="r__faker_forum_generator" js="0">Forum Generator</word>
-  <word key="r__faker_generate_forum_topics" js="0">Generate forum topics</word>
-  <word key="r__faker_member_generator" js="0">Member Generator</word>
-  <word key="r__faker_generate_member_accounts" js="0">Generate member accounts</word>
-  <word key="r__faker_purge" js="0">Purge Fake Content</word>
-  <word key="menu__faker_forumgen" js="0">Forum Generator</word>
-  <word key="menu__faker_forumgen_topics" js="0">Forum Topics</word>
-  <word key="faker_title_topicsGen" js="0">Generate Forum Topics</word>
-  <word key="faker_form_forums" js="0">Forums</word>
-  <word key="faker_form_author_type" js="0">Author type</word>
-  <word key="faker_form_author" js="0">Member name</word>
-  <word key="faker_form_custom_author" js="0">Manually specify a member</word>
-  <word key="faker_form_topic_range" js="0">Topic creation count</word>
-  <word key="faker_form_add_posts" js="0">Create additional posts in topics</word>
-  <word key="faker_form_post_range" js="0">Post creation count</word>
-  <word key="faker_form_add_tags" js="0">Add tags to posts</word>
-  <word key="faker_form_after_posting" js="0">After posting...</word>
-  <word key="menu__faker_membergen" js="0">Member Generator</word>
-  <word key="menu__faker_membergen_member" js="0">Member Accounts</word>
-  <word key="faker_title_membersGen" js="0">Generate Member Accounts</word>
-  <word key="faker_form_member_count" js="0">Member creation count</word>
-  <word key="faker_form_profile_photo" js="0">Generate profile photos</word>
-  <word key="faker_form_member_group" js="0">Member group</word>
-  <word key="faker_form_generate" js="0">Generate</word>
-  <word key="random_fake" js="0">Random fake member</word>
-  <word key="specific_member" js="0">Specific member</word>
+  <word key="faker_generator_title" js="0">Generating %s</word>
+  <word key="r__faker_generate" js="0">Generate Fake Content</word>
+  <word key="ext__NodeGenerator" js="0">Generate fake container Nodes (e.g. forums)</word>
+  <word key="ext__ItemGenerator" js="0">Generate fake Content Item submissions (e.g. forum topics)</word>
+  <word key="ext__CommentGenerator" js="0">Generate fake Content Comment submissions (e.g. forum topic posts)</word>
+  <word key="ext__ActiveRecordGenerator" js="0">Generate fake ActiveRecord submissions (e.g. members)</word>
+  <word key="menu__faker_forums" js="0">Forum Generators</word>
+  <word key="r__forums_faker_generate_forums" js="0">Generate Forums</word>
+  <word key="r__forums_faker_generate_topics" js="0">Generate Forum Topics</word>
+  <word key="r__forums_faker_generate_posts" js="0">Generate Topic Posts</word>
+  <word key="menu__faker_forums_Forum" js="0">Forums</word>
+  <word key="forums_faker_nodes_title" js="0">Generate Forums</word>
+  <word key="forums_faker_nodes_generator_message" js="0">Generating forums in %s</word>
+  <word key="forums_faker_nodes_description" js="0">Include description</word>
+  <word key="forums_faker_nodes_forum_type" js="0">Type</word>
+  <word key="forums_faker_nodes_node_range" js="0">Node creation count</word>
+  <word key="forums_faker_nodes_parent_ids" js="0">Parent Forums</word>
+  <word key="forums_faker_nodes_icon" js="0">Include icon</word>
+  <word key="forums_faker_nodes_password_on" js="0">Password protected?</word>
+  <word key="forums_faker_nodes_password" js="0">Password</word>
+  <word key="menu__faker_forums_ForumTopic" js="0">Forum Topics</word>
+  <word key="forums_faker_items_title" js="0">Generate Forum Topics</word>
+  <word key="forums_faker_items_generator_message" js="0">Generating forum topics in %s</word>
+  <word key="forums_faker_items_nodes" js="0">Forums</word>
+  <word key="forums_faker_items_author_type" js="0">Author type</word>
+  <word key="forums_faker_items_author" js="0">Member name</word>
+  <word key="forums_faker_items_item_range" js="0">Topic creation count</word>
+  <word key="forums_faker_items_add_comments" js="0">Create additional posts in topics</word>
+  <word key="forums_faker_items_comment_range" js="0">Post creation count</word>
+  <word key="forums_faker_items_add_tags" js="0">Add tags to topics</word>
+  <word key="forums_faker_items_after_posting" js="0">After posting...</word>
+  <word key="menu__faker_forums_TopicPost" js="0">Topic Posts</word>
+  <word key="forums_faker_comments_title" js="0">Generate Topic Posts</word>
+  <word key="forums_faker_comments_generator_message" js="0">Generating topic posts in in %s</word>
+  <word key="forums_faker_comments_item_url" js="0">Topic URL</word>
+  <word key="forums_faker_comments_author_type" js="0">Author type</word>
+  <word key="forums_faker_comments_author" js="0">Member name</word>
+  <word key="forums_faker_comments_comment_range" js="0">Post creation count</word>
+  <word key="forums_faker_comments_hide_comment" js="0">Hide posts</word>
+  <word key="menu__faker_core" js="0">System Generators</word>
+  <word key="r__core_faker_generate_members" js="0">Generate Member Accounts</word>
+  <word key="menu__faker_core_Members" js="0">Member Accounts</word>
+  <word key="core_members_faker_activerecords_title" js="0">Generate Member Accounts</word>
+  <word key="core_members_faker_activerecords_generator_message" js="0">Generating member account %s</word>
+  <word key="core_members_faker_activerecords_record_range" js="0">Member creation count</word>
+  <word key="core_members_faker_activerecords_member_group" js="0">Member group</word>
+  <word key="core_members_faker_activerecords_profile_photo" js="0">Profile photo</word>
+  <word key="core_members_faker_activerecords_password" js="0">Use username as password</word>
   <word key="menu__faker_tools" js="0">Tools</word>
   <word key="menu__faker_tools_purge" js="0">Delete Fake Content</word>
   <word key="faker_title_purge" js="0">Purge Faked Content</word>
-  <word key="faker_form_content_types" js="0">Content types</word>
-  <word key="faker_form_topics" js="0">Topics</word>
-  <word key="faker_form_members" js="0">Members</word>
+  <word key="faker_purge_content_types" js="0">Content types</word>
   <word key="faker_purge" js="0">Purge content</word>
+  <word key="faker_random_fake" js="0">Random fake member</word>
+  <word key="faker_custom_author" js="0">Manually specify a member</word>
   <word key="faker_generate_success" js="0">Content successfully generated</word>
   <word key="faker_purge_success" js="0">Fake content successfully deleted</word>
+  <word key="faker_form_generate" js="0">Generate</word>
+  <word key="faker_perGo" js="0">Cycle</word>
   <word key="faker_form_purge" js="0">Delete Content</word>
  </app>
 </language>

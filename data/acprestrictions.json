@@ -1,7 +1,10 @@
 {
     "generator": {
-        "posts": {
-            "posts_manage": "posts_manage"
+        "faker_generate": {
+            "core_faker_generate_members": "core_faker_generate_members",
+            "forums_faker_generate_topics": "forums_faker_generate_topics",
+            "forums_faker_generate_posts": "forums_faker_generate_posts",
+            "forums_faker_generate_forums": "forums_faker_generate_forums"
         }
     },
     "forumgen": {
