@@ -83,7 +83,7 @@ class _Faker extends \IPS\Patterns\ActiveRecord
 	{
 		$author = $author ?: \IPS\Member::loggedIn();
 		return \IPS\Db::i()->insert( static::$databaseTable, array(
-			'class'         => $class,
+			'class'         => trim( $class, '\\' ),
 			'content_id'    => $contentId,
 			'author'        => $author->member_id,
 			'created_at'    => time()
