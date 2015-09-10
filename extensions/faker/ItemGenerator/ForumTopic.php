@@ -103,7 +103,6 @@ class _ForumTopic extends \IPS\faker\Content\Item
 		$itemClass = static::$itemClass;
 		$obj = $itemClass::createItem( $member, $ipAddress = $this->generator->ipAddress(), new \IPS\DateTime, $forum );
 		$obj->processForm( $topicValues );
-		$obj->faker_fake = 1;
 		$obj->save();
 		$this->map( static::$itemClass, $obj->tid );
 

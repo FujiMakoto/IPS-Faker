@@ -69,7 +69,6 @@ class _Members extends \IPS\faker\Content\ActiveRecord
 	{
 		/* Create Member */
 		$member = new \IPS\Member;
-		$member->faker_fake         = 1;
 		$member->name               = $values['__generator_message'] = $this->generator->userName();
 		$password                   = isset ( $values['password'] ) ? $member->name : $this->generator->password();
 		$member->email              = $this->generator->email();

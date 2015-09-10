@@ -41,5 +41,7 @@ class _Upgrade
 				$member->delete();
 			}
 		} catch ( \Exception $e ) {}
+
+		return TRUE;
 	}
 }
