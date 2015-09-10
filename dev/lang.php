@@ -98,6 +98,7 @@ $lang = array(
 	'faker_generate_success'    => 'Content successfully generated',
 	'faker_purge_success'       => 'Fake content successfully deleted',
 	'faker_form_generate'       => 'Generate',
+	'faker_perGo'               => 'Cycle',
 
 
 	'faker_form_purge'  => 'Delete Content'
