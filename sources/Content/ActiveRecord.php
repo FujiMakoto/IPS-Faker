@@ -46,12 +46,12 @@ abstract class _ActiveRecord extends \IPS\faker\Content
 		/* If this is a form submission, store our values now */
 		if ( $values )
 		{
+			$values['total'] = mt_rand( $values['record_range']['start'], $values['record_range']['end'] );
 			unset( \IPS\Request::i()->cookie[ $vCookie ] );
 			\IPS\Request::i()->setCookie( $vCookie, json_encode($values) );
 		}
 		$values = $values ?: json_decode(\IPS\Request::i()->cookie[ $vCookie ], true);
 		$perGo = isset( $values['per_go'] ) ? (int) $values['per_go'] : 25;
-		$values['total'] = mt_rand( $values['record_range']['start'], $values['record_range']['end'] );
 
 		/* Generate the MultipleRedirect page */
 		$reflect    = new \ReflectionClass( $this );
