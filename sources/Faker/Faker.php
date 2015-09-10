@@ -52,6 +52,7 @@ class _Faker extends \IPS\Patterns\ActiveRecord
 	 */
 	public static function allFake( $class=NULL, $limit=0, $offset=0 )
 	{
+		$class = trim( $class, '\\' );
 		$where = $class ? array( 'class=?', $class ) : NULL;
 		if ( !$limit and !$offset )
 		{
