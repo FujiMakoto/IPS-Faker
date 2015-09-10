@@ -90,7 +90,7 @@ class _purge extends \IPS\Dispatcher\Controller
 					$obj = $class::load( $fake->content_id );
 					$obj->delete();
 				}
-				catch ( \UnderflowException $e ) {}
+				catch ( \OutOfRangeException $e ) {}
 
 				$fake->delete();
 			}
