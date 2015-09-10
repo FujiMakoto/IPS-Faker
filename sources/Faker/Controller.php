@@ -55,6 +55,7 @@ class _Controller extends \IPS\Dispatcher\Controller
 		if ( !($extApp = \IPS\Request::i()->extApp) or !($extension = \IPS\Request::i()->extension) )
 		{
 			\IPS\Output::i()->error( 'generic_error', 'FAKER_BAD_REQUEST', 400 );
+			return array();
 		}
 
 		/* Try and fetch the requested extension or display a generic 404 error if we can't find it */
@@ -89,6 +90,11 @@ class _Controller extends \IPS\Dispatcher\Controller
 		));
 		$form->langPrefix = "{$extApp}_faker_{$controller}";
 		$ext->buildGenerateForm( $form );
+
+		/* Cycle field */
+		$cycle = new \IPS\Helpers\Form\Number( 'per_go', $ext::$cycleDefault, TRUE, array( 'min' => 1 ) );
+		$cycle->label = \IPS\Member::loggedIn()->language()->addToStack( 'faker_perGo' );
+		$form->add( $cycle );
 
 		if ( $values = $form->values() )
 		{

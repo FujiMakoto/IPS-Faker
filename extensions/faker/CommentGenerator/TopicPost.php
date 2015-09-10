@@ -107,7 +107,7 @@ class _TopicPost extends \IPS\faker\Content\Comment
 	{
 		$form->add( new \IPS\Helpers\Form\Url( 'item_url', NULL, TRUE ) );
 		$form->add( new \IPS\Helpers\Form\Select( 'author_type', 'random_fake', TRUE, array(
-			'options' => array( 'random_fake' => 'random_fake', 'guest' => 'guest' ), 'unlimited' => '-1',
+			'options' => array( 'random_fake' => 'faker_random_fake', 'guest' => 'guest' ), 'unlimited' => '-1',
 			'unlimitedLang' => "faker_custom_author", 'unlimitedToggles' => array( 'faker_custom_author' )
 		) ) );
 		$form->add( new \IPS\Helpers\Form\Member( 'author', NULL, FALSE, array(), NULL, NULL, NULL, 'faker_custom_author' ) );

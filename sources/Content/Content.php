@@ -45,6 +45,11 @@ abstract class _Content
 	public static $message;
 
 	/**
+	 * @brief   Default generator cycle value
+	 */
+	public static $cycleDefault = 25;
+
+	/**
 	 * @brief   Faker decorator container
 	 * @var     \IPS\faker\Content\Generator
 	 */

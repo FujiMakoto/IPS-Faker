@@ -55,6 +55,11 @@ class _Members extends \IPS\faker\Content\ActiveRecord
 	public static $message = 'core_members_faker_activerecords_generator_message';
 
 	/**
+	 * @brief   Default generator cycle value
+	 */
+	public static $cycleDefault = 1;
+
+	/**
 	 * Generate a fake member account
 	 *
 	 * @param   array   $values Generator form values
