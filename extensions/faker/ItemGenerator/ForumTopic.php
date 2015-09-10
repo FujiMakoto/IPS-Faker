@@ -130,7 +130,7 @@ class _ForumTopic extends \IPS\faker\Content\Item
 			$obj->save();
 		}
 
-		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $forum->_title ) );
+		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => array($forum->_title) ) );
 	}
 
 	/**

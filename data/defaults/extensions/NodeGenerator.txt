@@ -90,7 +90,7 @@ class _{class} extends \IPS\faker\Content\Node
 		$itemClass = static::$itemClass;
 		call_user_func_array( array( 'IPS\File', 'claimAttachments' ), array_merge( array( 'newContentItem-' . $item::$application . '/' . $itemClass::$module  . '-' . 0 ), $obj->attachmentIds() ) );
 
-		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $parent ? $parent->_title : 'root' ) );
+		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => array($parent ? $parent->_title : 'root') ) );
 	}
 
 	/**

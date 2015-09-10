@@ -95,7 +95,7 @@ class _{class} extends \IPS\faker\Content\Comment
 
 		return $first
 			? $obj
-			: \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $item->mapped('title') ) );
+			: \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => array( $item->mapped('title') ) ) );
 	}
 
 	/**

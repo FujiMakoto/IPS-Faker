@@ -96,7 +96,7 @@ class _TopicPost extends \IPS\faker\Content\Comment
 
 		return $first
 			? $obj
-			: \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $topic->mapped('title') ) );
+			: \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => array( $topic->mapped('title') ) ) );
 	}
 
 	/**

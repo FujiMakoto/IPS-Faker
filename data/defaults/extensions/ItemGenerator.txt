@@ -131,7 +131,7 @@ class _{class} extends \IPS\faker\Content\Item
 			$obj->save();
 		}
 
-		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => $node->_title ) );
+		return \IPS\Member::loggedIn()->language()->addToStack( static::$message, TRUE, array( 'sprintf' => array($node->_title) ) );
 	}
 
 	/**
