@@ -30,6 +30,11 @@ class _Members extends \IPS\faker\Content\ActiveRecord
 	public static $app = 'core';
 
 	/**
+	 * @brief   Content class
+	 */
+	public static $class = 'IPS\Member';
+
+	/**
 	 * @brief   AdminCP tab restriction
 	 */
 	public static $acpRestriction = 'core_faker_generate_members';

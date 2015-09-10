@@ -30,6 +30,11 @@ class _Forum extends \IPS\faker\Content\Node
 	public static $app = 'forums';
 
 	/**
+	 * @brief   Content class
+	 */
+	public static $class = 'IPS\forums\Forum';
+
+	/**
 	 * @brief   AdminCP tab restriction
 	 */
 	public static $acpRestriction = 'forums_faker_generate_forums';

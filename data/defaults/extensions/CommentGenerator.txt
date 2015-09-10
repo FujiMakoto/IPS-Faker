@@ -30,6 +30,11 @@ class _{class} extends \IPS\faker\Content\Comment
 	public static $app = '{app}';
 
 	/**
+	 * @brief   Content class
+	 */
+	public static $class = 'IPS\{app}\YourClass';
+
+	/**
 	 * @brief   AdminCP tab restriction
 	 */
 	public static $acpRestriction = 'faker_generate';

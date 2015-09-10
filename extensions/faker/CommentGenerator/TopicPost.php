@@ -30,6 +30,11 @@ class _TopicPost extends \IPS\faker\Content\Comment
 	public static $app = 'forums';
 
 	/**
+	 * @brief   Content class
+	 */
+	public static $class = 'IPS\forums\Topic\Post';
+
+	/**
 	 * @brief   AdminCP tab restriction
 	 */
 	public static $acpRestriction = 'forums_faker_generate_posts';

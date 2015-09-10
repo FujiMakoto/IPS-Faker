@@ -30,6 +30,11 @@ class _ForumTopic extends \IPS\faker\Content\Item
 	public static $app = 'forums';
 
 	/**
+	 * @brief   Content class
+	 */
+	public static $class = 'IPS\forums\Topic';
+
+	/**
 	 * @brief   AdminCP tab restriction
 	 */
 	public static $acpRestriction = 'forums_faker_generate_topics';
