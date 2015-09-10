@@ -25,6 +25,11 @@ abstract class _Content
 	public static $app;
 
 	/**
+	 * @brief   Content class
+	 */
+	public static $class;
+
+	/**
 	 * @brief   AdminCP tab restriction
 	 */
 	public static $acpRestriction;
