@@ -1,7 +1,7 @@
 {
     "admin": {
         "tools": {
-            "default_controller": "",
+            "default_controller": "purge",
             "protected": 0
         },
         "generator": {

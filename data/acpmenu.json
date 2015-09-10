@@ -1,20 +1,4 @@
 {
-    "forumgen": {
-        "topics": {
-            "tab": "faker",
-            "controller": "topics",
-            "do": "",
-            "restriction": "topics_manage"
-        }
-    },
-    "membergen": {
-        "member": {
-            "tab": "faker",
-            "controller": "members",
-            "do": "",
-            "restriction": "member_manage"
-        }
-    },
     "tools": {
         "purge": {
             "tab": "faker",
