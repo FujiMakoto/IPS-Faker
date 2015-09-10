@@ -48,14 +48,20 @@ class _Faker extends \IPS\Patterns\ActiveRecord
 	 * @param   null    $class  Content item class, or NULL to return all
 	 * @param   int     $limit  Query limit
 	 * @param   int     $offset Query offset
-	 * @return  \IPS\Db\Select
+	 * @return  Faker[]
 	 */
 	public static function allFake( $class=NULL, $limit=0, $offset=0 )
 	{
 		$where = $class ? array( 'class=?', $class ) : NULL;
 		$limit = array( (int) $offset, (int) $limit );
+		$select = \IPS\Db::i()->select( '*', static::$databaseTable, $where, NULL, $limit );
 
-		return \IPS\Db::i()->select( '*', static::$databaseTable, $where, NULL, $limit );
+		$fakes = array();
+		foreach ( $select as $row ) {
+			$fakes[] = static::constructFromData( $row );
+		}
+
+		return $fakes;
 	}
 
 	/**
