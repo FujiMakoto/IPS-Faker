@@ -72,7 +72,11 @@ class _TopicPost extends \IPS\faker\Content\Comment
 		$commentClass = static::$commentClass;
 
 		/* Generate the author */
-		if ( $values['author'] )
+		if ( $first )
+		{
+			$member = $topic->author();
+		}
+		elseif ( $values['author'] )
 		{
 			$member = $values['author'];
 		}
