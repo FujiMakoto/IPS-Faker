@@ -53,7 +53,14 @@ class _Faker extends \IPS\Patterns\ActiveRecord
 	public static function allFake( $class=NULL, $limit=0, $offset=0 )
 	{
 		$where = $class ? array( 'class=?', $class ) : NULL;
-		$limit = array( (int) $offset, (int) $limit );
+		if ( !$limit and !$offset )
+		{
+			$limit = NULL;
+		}
+		elseif ( $limit and $offset )
+		{
+			$limit = array( (int) $offset, (int) $limit );
+		}
 		$select = \IPS\Db::i()->select( '*', static::$databaseTable, $where, NULL, $limit );
 
 		$fakes = array();
