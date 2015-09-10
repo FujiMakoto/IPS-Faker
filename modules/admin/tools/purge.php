@@ -27,12 +27,23 @@ class _purge extends \IPS\Dispatcher\Controller
 		parent::execute();
 	}
 
+	/**
+	 * Get a class map for all enabled Faker extensions
+	 *
+	 * @return  string[]
+	 */
 	protected function getContentTypes()
 	{
-		return array(
-				'topics' 	=> 'faker_form_topics',
-				'members'	=> 'faker_form_members'
-		);
+		$extensions = \IPS\faker\Faker::allExtensions();
+
+		$contentMap = array();
+		foreach ( $extensions as $extension )
+		{
+			$reflect = new \ReflectionClass( $extension );
+			$contentMap[ $extension::$class ] = "menu__faker_{$extension::$app}_" . $reflect->getShortName();
+		}
+
+		return $contentMap;
 	}
 
 	/**
@@ -43,43 +54,45 @@ class _purge extends \IPS\Dispatcher\Controller
 	protected function manage()
 	{
 		$form = new \IPS\faker\Decorators\Form( 'form', 'faker_purge' );
-		$form->langPrefix = 'faker_form';
+		$form->langPrefix = 'faker_purge';
 		$form->add( new \IPS\Helpers\Form\CheckboxSet( 'content_types', 0, true, array(
 			'options' => $this->getContentTypes()
 		) ) );
 
-		if ( $values = $form->values() ) {
+		if ( $values = $form->values() )
+		{
 			$this->_purgeContent( $values );
-			return \IPS\Output::i()->redirect( \IPS\Http\Url::internal( 'app=faker&module=tools&controller=purge' ),
+			\IPS\Output::i()->redirect( \IPS\Http\Url::internal( 'app=faker&module=tools&controller=purge' ),
 				'faker_purge_success' );
+			return;
 		}
 
-		return \IPS\Output::i()->output = $form;
+		\IPS\Output::i()->output = $form;
+		return;
 	}
 
 	/**
 	 * Purge fake content from the database
 	 * TODO: Implement MultiRedirect support
+	 * TODO: This is horribly inefficient (rewrite this as an IN() query and manually construct data)
 	 *
 	 * @param	array	$values	Generator form values
 	 */
-	protected function _purgeContent($values)
+	protected function _purgeContent( $values )
 	{
-		if ( in_array('topics', $values['content_types']) )
+		foreach ( $values['content_types'] as $class )
 		{
-			$topics = \IPS\faker\Content\Forum\Topic::allFake();
+			$fakes = \IPS\faker\Faker::allFake( $class );
+			foreach ( $fakes as $fake )
+			{
+				try
+				{
+					$obj = $class::load( $fake->content_id );
+					$obj->delete();
+				}
+				catch ( \UnderflowException $e ) {}
 
-			foreach ( $topics as $topic ) {
-				$topic->delete();
-			}
-		}
-
-		if ( in_array('members', $values['content_types']) )
-		{
-			$members = \IPS\faker\Content\Member::allFake();
-
-			foreach ( $members as $member ) {
-				$member->delete();
+				$fake->delete();
 			}
 		}
 	}
