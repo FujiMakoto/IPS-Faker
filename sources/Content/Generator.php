@@ -147,8 +147,29 @@ class _Generator
 	 */
 	public function fakeMember()
 	{
-		if ( $fakeMembers = \IPS\faker\Faker::allFake('\IPS\Member') ) {
-			return $fakeMembers[ array_rand( $fakeMembers ) ];
+		if ( $fakes = \IPS\faker\Faker::allFake('\IPS\Member') )
+		{
+			$fakeIds = array();
+			foreach ( $fakes as $fake ) {
+				$fakeIds[ $fake->content_id ] = $fake;
+			}
+
+			/* If a fake member account has been deleted, remove the map and try again */
+			while ( $fakeIds )
+			{
+				$fid = array_rand( $fakeIds );
+
+				try
+				{
+					return \IPS\Member::load( $fid );
+				}
+				catch ( \UnderflowException $e )
+				{
+					$fake = $fakeIds[ $fid ];
+					$fake->delete();
+					unset( $fakeIds[ $fid ] );
+				}
+			}
 		}
 
 		return $this->guest();
