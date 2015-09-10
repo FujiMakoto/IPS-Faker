@@ -59,6 +59,8 @@ abstract class _Comment extends \IPS\faker\Content
 				$values['author'] = $values['author']->member_id;
 			}
 
+			$values['total'] = mt_rand( $values['comment_range']['start'], $values['comment_range']['end'] );
+
 			unset( \IPS\Request::i()->cookie[ $vCookie ] );
 			\IPS\Request::i()->setCookie( $vCookie, json_encode($values) );
 		}
@@ -72,10 +74,8 @@ abstract class _Comment extends \IPS\faker\Content
 			$values['item_url'] = \IPS\Http\Url::createFromArray( $values['item_url']['data'] );
 		}
 
-		$perGo = isset( $values['per_go'] ) ? (int) $values['per_go'] : 25;
-		$values['total'] = mt_rand( $values['comment_range']['start'], $values['comment_range']['end'] );
-
 		/* Generate the MultipleRedirect page */
+		$perGo = isset( $values['per_go'] ) ? (int) $values['per_go'] : 25;
 		$reflect = new \ReflectionClass( $this );
 		$extension = $reflect->getShortName();
 		$processUrl = \IPS\Http\Url::internal(
@@ -90,14 +90,15 @@ abstract class _Comment extends \IPS\faker\Content
 
 			/* Load our content item container */
 			$itemClass = $self::$itemClass;
-			$_item = $itemClass::loadFromUrl( $values['item_url'] );
+			$item = $itemClass::loadFromUrl( $values['item_url'] );
 
 			$count = 0;
+			$limit = $values['total'] - $doneSoFar;
 			$generated = array();
-			while ( ($count < $values['total']) and (count($generated) < $perGo) )
+			while ( ($count < $limit) and (count($generated) < $perGo) )
 			{
 				++$count;
-				$generated[] = $self->generateSingle( $_item, $values );
+				$generated[] = $self->generateSingle( $item, $values );
 			}
 			$doneSoFar += $perGo;
 
