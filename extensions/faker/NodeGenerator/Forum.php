@@ -75,13 +75,11 @@ class _Forum extends \IPS\faker\Content\Node
 
 		$nodeValues = array(
 			'forum_name'        => $this->generator->title(),
+			'forum_description' => $values['description'] ? $this->generator->description() : ' ',
 			'forum_type'        => $values['forum_type'],
 			'forum_parent_id'   => $parent,
 			'forum_password'    => $values['password']
 		);
-
-		if ( $values['description'] )
-			$nodeValues['forum_description'] = $this->generator->description();
 
 		if ( $parent )
 		{
