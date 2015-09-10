@@ -13,7 +13,7 @@ class _Generator
 {
 	/**
 	 * @brief   Faker instance
-	 * @var     \Faker
+	 * @var     \Faker\Generator
 	 */
 	public $faker;
 
@@ -143,11 +143,11 @@ class _Generator
 	/**
 	 * Return a random fake member account (or guest account if none exist)
 	 *
-	 * @return  \IPS\faker\Content\Member
+	 * @return  \IPS\Member
 	 */
 	public function fakeMember()
 	{
-		if ( $fakeMembers = \IPS\faker\Content\Member::allFake() ) {
+		if ( $fakeMembers = \IPS\faker\Faker::allFake('\IPS\Member') ) {
 			return $fakeMembers[ array_rand( $fakeMembers ) ];
 		}
 
@@ -161,7 +161,7 @@ class _Generator
 	 */
 	public function guest()
 	{
-		$member = \IPS\faker\Content\Member::load( 0 );
+		$member = \IPS\Member::load( 0 );
 		$member->name = $this->userName();
 
 		return $member;
