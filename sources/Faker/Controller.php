@@ -54,7 +54,7 @@ class _Controller extends \IPS\Dispatcher\Controller
 		/* Make sure our extension app and extension name have been defined */
 		if ( !($extApp = \IPS\Request::i()->extApp) or !($extension = \IPS\Request::i()->extension) )
 		{
-			\IPS\Output::i()->error( 'generic_error', 'FAKER_BAD_REQUEST', 400 );
+			\IPS\Output::i()->error( 'generic_error', '3FAKE108/1', 400 );
 			return array();
 		}
 
@@ -68,7 +68,7 @@ class _Controller extends \IPS\Dispatcher\Controller
 		}
 		catch ( \Whoops\Exception\ErrorException $e )
 		{
-			\IPS\Output::i()->error( 'node_error', 'FAKER_EXTENSION_NOT_FOUND', 404 );
+			\IPS\Output::i()->error( 'node_error', '2FAKE108/2', 404 );
 			return array();
 		}
 
