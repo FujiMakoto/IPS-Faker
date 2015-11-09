@@ -70,4 +70,16 @@ class _Application extends \IPS\Application
 
 		return $menu;
 	}
+
+	/**
+	 * Extract developer resources on installation
+	 */
+	public function installOther()
+	{
+		try
+		{
+			\IPS\faker\DevFiles::extract();
+		}
+		catch ( \Exception $e ) {}
+	}
 }
